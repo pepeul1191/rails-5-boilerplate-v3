@@ -1,24 +1,23 @@
-# README
+# Rails BackEnd Canchas
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Arrancer Puma con rerun:
 
-Things you may want to cover:
+    $ rails s
 
-* Ruby version
+### Migraciones
 
-* System dependencies
+Migraciones con DBMATE - accesos:
 
-* Configuration
+    $ dbmate -d "db/access-local/migrations/dml" -e "DATABASE_ACCESS_LOCAL" new <<nombre_de_migracion>>
+    $ dbmate -d "db/access-local/migrations/dml" -e "DATABASE_ACCESS_LOCAL" up
+    $ dbmate -d "db/access-local/migrations" -e "DATABASE_ACCESS_LOCAL" new <<nombre_de_migracion>>
+    $ dbmate -d "db/access-local/migrations" -e "DATABASE_ACCESS_LOCAL" up
 
-* Database creation
+---
 
-* Database initialization
+Fuentes:
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
++ http://padrinorb.com/
++ http://padrinorb.com/guides/generators/sub-applications/
++ https://stackoverflow.com/questions/26594897/override-not-found-sinatra-application
++ https://stackoverflow.com/questions/26515700/mysql-jdbc-driver-5-1-33-time-zone-issue
