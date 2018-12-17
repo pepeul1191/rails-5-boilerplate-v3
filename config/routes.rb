@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   # login y sessiones
   get 'login/managment' => 'login#managment'
   get 'login' => 'login#index'
+  get 'login/sign_in' => 'login#sign_in'
   # errores
   get 'error/access/:id' => 'error#access'
   get '*unmatched_route' => 'application#not_found'
