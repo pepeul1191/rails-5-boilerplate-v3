@@ -17,4 +17,12 @@ class ApplicationController < ActionController::Base
         }.to_json, status: 500
     end
   end
+
+  def get_content(path)
+    YAML.load_file(RAILS_ROOT + '/app/contents/' + path + '.yml')
+  end
+
+  def get_language()
+    'sp'
+  end
 end

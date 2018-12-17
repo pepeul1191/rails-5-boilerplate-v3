@@ -13,12 +13,16 @@ class LoginController < ApplicationController
   end
 
   def index
+    lang = get_language()
+    contents = get_content('login/index')[lang]
     @locals = {
       :title => 'Bienvenido',
       :message => '',
       :message_type => '',
       :css => LoginHelper::index_css,
       :js => LoginHelper::managment_js,
+      :contents => contents,
+      :lang => lang,
     }
     render template: 'login/index', layout: 'blank'
   end
