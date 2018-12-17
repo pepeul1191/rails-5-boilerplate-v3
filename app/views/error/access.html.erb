@@ -1,0 +1,10 @@
+<div class="row text-center">
+  <h1 class="align-text-bottom"><%=@locals[:error][:numero]%></h1>
+</div>
+<div class="row text-center">
+	<div class="error-divider">
+		<h2><%=@locals[:error][:mensaje]%></h2>
+		<p class="description"><%=@locals[:error][:descripcion]%></p>
+	</div>
+	<a href="<%= CONSTANTS[:BASE_URL] %>login" class="return-btn"><i class="fa fa-home"></i>Ir al Inicio</a>
+</div>

@@ -4,6 +4,10 @@ Arrancer Puma con rerun:
 
     $ rails s
 
+Nuevo controlador:
+
+    $ rails generate controller error
+
 ### Migraciones
 
 Migraciones con DBMATE - accesos:
