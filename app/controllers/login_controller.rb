@@ -41,4 +41,19 @@ class LoginController < ApplicationController
     }
     render template: 'login/sign_in', layout: 'blank'
   end
+
+  def reset
+    lang = get_language()
+    contents = get_content('login/reset')[lang]
+    @locals = {
+      :title => get_titles()[lang]['login_reset'],
+      :message => '',
+      :message_type => '',
+      :css => LoginHelper::index_css,
+      :js => LoginHelper::managment_js,
+      :contents => contents,
+      :lang => lang,
+    }
+    render template: 'login/reset', layout: 'blank'
+  end
 end
