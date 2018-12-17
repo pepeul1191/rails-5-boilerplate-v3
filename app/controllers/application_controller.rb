@@ -22,6 +22,10 @@ class ApplicationController < ActionController::Base
     YAML.load_file(RAILS_ROOT + '/app/contents/' + path + '.yml')
   end
 
+  def get_titles()
+    YAML.load_file(RAILS_ROOT + '/app/contents/_titles.yml')
+  end
+
   def get_language()
     'sp'
   end
