@@ -41,6 +41,8 @@ Rails.application.routes.draw do
   # managment/service
   get 'managment/service/list' => 'managment/service#list'
   post 'managment/service/save' => 'managment/service#save'
+  # managment/field
+  get 'managment/field/field_type/:field_id' => 'managment/field#field_type_list'
   # managment/field_type
   get 'managment/field_type/list' => 'managment/field_type#list'
   post 'managment/field_type/save' => 'managment/field_type#save'
