@@ -25,6 +25,8 @@ Rails.application.routes.draw do
   get 'managment/district/get/:district_id' => 'managment/district#name_by_id'
   get 'managment/district/search' => 'managment/district#search'
   post 'managment/district/save' => 'managment/district#save'
+  # managment/client_state
+  get 'managment/client_state/list' => 'managment/client_state#list'
   # managment/service
   get 'managment/service/list' => 'managment/service#list'
   post 'managment/service/save' => 'managment/service#save'
