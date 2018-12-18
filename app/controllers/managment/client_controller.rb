@@ -86,4 +86,33 @@ class Managment::ClientController < ApplicationController
 		end
 		render :plain => rpta, :status => status
   end
+
+  def service_list
+    rpta = []
+    status = 200
+    begin
+      rpta = DB_MANAGMNET.fetch('
+        SELECT T.id AS id, T.name AS name, (CASE WHEN (P.existe = 1) THEN 1 ELSE 0 END) AS existe FROM
+        (
+          SELECT id, name, 0 AS existe FROM services
+        ) T
+        LEFT JOIN
+        (
+          SELECT S.id, S.name AS name, 1 AS existe
+          FROM clients_services CS
+          INNER JOIN services S ON CS.service_id = S.id
+          WHERE CS.client_id = ' + params[:client_id] + '
+        ) P
+        ON T.id = P.id;').to_a.to_json
+    rescue Exception => e
+      status = 500
+      rpta = {
+        :tipo_mensaje => 'error',
+        :mensaje => [
+          'Se ha producido un error en listar los servicios del cliente',
+          e.message
+        ]}
+    end
+    render :plain => rpta, :status => status
+  end
 end
