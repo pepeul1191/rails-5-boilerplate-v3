@@ -22,5 +22,19 @@ sp:
               url: managment/#/service
             - name: Gestión de Tipos de Canchas
               url: managment/#/field_type
-            - name: Gestión de Servicios
+            - name: Gestión de Bancos
               url: managment/#/bank
+            - name: Gestión de Banners
+              url: managment/#/banner
+        - name: Clientes
+          items:
+            - name: Gestión de Clientes
+              url: managment/#/client
+            - name: Agregar Cliente
+              url: managment/#/client/add
+        - name: Usuarios
+          items:
+            - name: Gestión de Usuarios
+              url: managment/user/#/
+            - name: Agregar Usuario
+              url: managment/user/#/add
