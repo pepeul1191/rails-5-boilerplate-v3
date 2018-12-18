@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   post 'managment/department/save' => 'managment/department#save'
   # managment/client
   get 'managment/client/list' => 'managment/client#list'
+  post 'managment/client/save' => 'managment/client#save'
   # managment/province
   get 'managment/province/list/:deparment_id' => 'managment/province#list'
   post 'managment/province/save' => 'managment/province#save'
@@ -27,7 +28,6 @@ Rails.application.routes.draw do
   post 'managment/district/save' => 'managment/district#save'
   # managment/client_state
   get 'managment/client_state/list' => 'managment/client_state#list'
-  post 'managment/client_state/save' => 'managment/client_state#save'
   # managment/service
   get 'managment/service/list' => 'managment/service#list'
   post 'managment/service/save' => 'managment/service#save'
