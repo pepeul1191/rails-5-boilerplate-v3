@@ -15,12 +15,15 @@ Rails.application.routes.draw do
   # managment/department
   get 'managment/department/list' => 'managment/department#list'
   post 'managment/department/save' => 'managment/department#save'
+  # managment/field
+
   # managment/client
   get 'managment/client/list' => 'managment/client#list'
   post 'managment/client/save' => 'managment/client#save'
   get 'managment/client/get/:client_id' => 'managment/client#get'
   get 'managment/client/service/:client_id' => 'managment/client#service_list'
   post 'managment/client/service/save' => 'managment/client#service_save'
+  get 'managment/client/field/:client_id' => 'managment/client#field_list'
   # managment/province
   get 'managment/province/list/:deparment_id' => 'managment/province#list'
   post 'managment/province/save' => 'managment/province#save'

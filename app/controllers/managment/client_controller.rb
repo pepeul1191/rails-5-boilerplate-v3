@@ -165,4 +165,24 @@ class Managment::ClientController < ApplicationController
     end
     render :plain => rpta.to_json, :status => status
   end
+
+  def field_list
+    rpta = nil
+    status = 200
+    begin
+      rpta = Managment::Field.where(
+          :client_id => params[:client_id]
+        ).all().to_a.to_json
+    rescue Exception => e
+      rpta = {
+        :tipo_mensaje => 'error',
+        :mensaje => [
+          'Se ha producido un error en listar las canchas del cliente',
+          e.message
+        ]
+      }.to_json
+      status = 500
+    end
+    render :plain => rpta, :status => status
+  end
 end
