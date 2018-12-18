@@ -28,4 +28,54 @@ class Managment::FieldController < ApplicationController
     end
     render :plain => rpta, :status => status
   end
+
+  def field_type_save
+    data = JSON.parse(params[:data])
+    editados = data['editados']
+    field_id = data['extra']['field_id']
+    rpta = []
+    status = 200
+    DB_MANAGMNET.transaction do
+      begin
+        if editados.length != 0
+          editados.each do |editado|
+            existe = editado['existe']
+            field_type_id = editado['id']
+            e = Managment::FieldFieldType.where(
+              :field_type_id => field_type_id,
+              :field_id => field_id
+            ).first
+            if existe == 0 #borrar si existe
+              if e != nil
+                e.delete
+              end
+            elsif existe == 1 #crear si no existe
+              if e == nil
+                n = Managment::FieldFieldType.new(
+                  :field_type_id => field_type_id,
+                  :field_id => field_id
+                )
+                n.save
+              end
+            end
+          end
+        end
+        rpta = {
+          :tipo_mensaje => 'success',
+          :mensaje => [
+            'Se ha registrado la asociación de tipos de canchas a la cancha',
+          ]}
+      rescue Exception => e
+        Sequel::Rollback
+        status = 500
+        rpta = {
+          :tipo_mensaje => 'error',
+          :mensaje => [
+            'Se ha producido un error en asociar los tipos de canchas a la cancha',
+            e.message
+          ]}
+      end
+    end
+    render :plain => rpta.to_json, :status => status
+  end
 end
