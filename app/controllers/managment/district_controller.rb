@@ -98,9 +98,17 @@ class Managment::DistrictController < ApplicationController
 		rpta = nil
 		status = 200
 		begin
-			rpta = Managment::VWDistrict.where(
+			list = Managment::VWDistrict.where(
           Sequel.like(:name, params[:nombre] + '%')
-        ).limit(10).to_a.to_json
+        ).limit(10).to_a
+      rpta = []
+      list.each do |e|
+        rpta.push({
+          :id => e.id,
+          :nombre => e.name,
+        })
+      end
+      rpta = rpta.to_json
 		rescue Exception => e
 			rpta = {
 				:tipo_mensaje => 'error',
