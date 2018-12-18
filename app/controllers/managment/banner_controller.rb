@@ -33,7 +33,9 @@ class Managment::BannerController < ApplicationController
         if nuevos.length != 0
           nuevos.each do |nuevo|
             n = Managment::Banner.new(
-              :name => nuevo['name']
+              :description => nuevo['description'],
+              :url => nuevo['url'],
+              :link => nuevo['link'],
             )
             n.save
             t = {
@@ -48,7 +50,9 @@ class Managment::BannerController < ApplicationController
             e = Managment::Banner.where(
               :id => editado['id']
             ).first
-            e.name = editado['name']
+            e.description = editado['description']
+            e.url = editado['url']
+            e.link = editado['link']
             e.save
           end
         end
