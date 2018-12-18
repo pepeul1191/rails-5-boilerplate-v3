@@ -122,7 +122,7 @@ class Managment::DistrictController < ApplicationController
 		render :plain => rpta, :status => status
 	end
 
-  	def name_by_id
+  def name_by_id
 		rpta = nil
 		status = 200
 		begin

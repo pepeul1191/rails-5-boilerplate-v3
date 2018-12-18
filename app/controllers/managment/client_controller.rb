@@ -67,4 +67,23 @@ class Managment::ClientController < ApplicationController
     end
     render :plain => rpta, :status => status
   end
+
+  def get
+    rpta = nil
+		status = 200
+		begin
+			rpta = Managment::VWClientDistrictState.where(
+        :id => params[:client_id]).first.to_json
+		rescue Exception => e
+			rpta = {
+				:tipo_mensaje => 'error',
+				:mensaje => [
+					'Se ha producido un error en buscar el nombre del distrito',
+					e.message
+				]
+			}.to_json
+			status = 500
+		end
+		render :plain => rpta, :status => status
+  end
 end
