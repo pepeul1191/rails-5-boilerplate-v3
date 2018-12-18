@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   post 'managment/district/save' => 'managment/district#save'
   # managment/service
   get 'managment/service/list' => 'managment/service#list'
+  post 'managment/service/save' => 'managment/service#save'
   # access
   get 'access/' => 'access/view#index'
   # errores
