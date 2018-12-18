@@ -7,9 +7,13 @@ sp:
         - name: Maestros
           items:
             - name: Gestión de Permisos
-              url: managment/#/permision
+              url: access/#/permision
             - name: Gestión de Roles
               url: access/#/rols
+        - name: Gestión de Usuarios
+          items:
+            - name: Gestión de Usuarios
+              url: access/#/user
     - name: Administración
       url: managment/
       icon: ''

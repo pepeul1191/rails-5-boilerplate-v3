@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get 'login/close' => 'login#close'
   # managment
   get 'managment/' => 'managment/view#index'
+  get 'managment/department/list' => 'managment/department#list'
   # access
   get 'access/' => 'access/view#index'
   # errores

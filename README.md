@@ -21,6 +21,12 @@ Migraciones con DBMATE - accesos:
     $ dbmate -d "db/access-local/migrations" -e "DATABASE_ACCESS_LOCAL" new <<nombre_de_migracion>>
     $ dbmate -d "db/access-local/migrations" -e "DATABASE_ACCESS_LOCAL" up
 
+Migraciones con DBMATE - managment:
+
+    $ dbmate -d "db/managment/migrations" -e "CANCHAS" new <<nombre_de_migracion>>
+    $ dbmate -d "db/managment/migrations" -e "CANCHAS" up
+    $ dbmate -d "db/managment/migrations" -e "CANCHAS" rollback
+
 ---
 
 Fuentes:
