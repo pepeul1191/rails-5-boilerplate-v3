@@ -115,4 +115,54 @@ class Managment::ClientController < ApplicationController
     end
     render :plain => rpta, :status => status
   end
+
+  def service_save
+    data = JSON.parse(params[:data])
+    editados = data['editados']
+    client_id = data['extra']['client_id']
+    rpta = []
+    status = 200
+    DB_MANAGMNET.transaction do
+      begin
+        if editados.length != 0
+          editados.each do |editado|
+            existe = editado['existe']
+            service_id = editado['id']
+            e = Managment::ClientService.where(
+              :service_id => service_id,
+              :client_id => client_id
+            ).first
+            if existe == 0 #borrar si existe
+              if e != nil
+                e.delete
+              end
+            elsif existe == 1 #crear si no existe
+              if e == nil
+                n = Managment::ClientService.new(
+                  :service_id => service_id,
+                  :client_id => client_id
+                )
+                n.save
+              end
+            end
+          end
+        end
+        rpta = {
+          :tipo_mensaje => 'success',
+          :mensaje => [
+            'Se ha registrado la asociación de servicios al cliente',
+          ]}
+      rescue Exception => e
+        Sequel::Rollback
+        status = 500
+        rpta = {
+          :tipo_mensaje => 'error',
+          :mensaje => [
+            'Se ha producido un error en asociar los servicios al cliente',
+            e.message
+          ]}
+      end
+    end
+    render :plain => rpta.to_json, :status => status
+  end
 end
