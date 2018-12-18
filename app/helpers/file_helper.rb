@@ -10,14 +10,10 @@ module FileHelper
       url = ''
       file_name_array = file.path.split('/')
       extension = file_name_array.last.split('.').last
-
       new_name = self.generate_random + '.' + extension
-      puts '1 +++++++++++++++++++++++++++++++++++++++++++'
-      puts new_name
-      puts '2 +++++++++++++++++++++++++++++++++++++++++++'
       if CONSTANTS[:upload][:type] == 'local'
         FileUtils.mv(file.path, CONSTANTS[:upload][:local][:path] + new_name)
-        url = CONSTANTS[:upload][:local][:server]
+        url = CONSTANTS[:upload][:url]
       elsif CONSTANTS[:upload][:type] == 'ftp'
         #TODO
       end

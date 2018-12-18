@@ -8,11 +8,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%=@locals[:title]%></title>
     <script type="text/javascript">
-      var BASE_URL = "<%=CONSTANTS[:base_url]%>";
-      var STATICS_URL  = "<%=CONSTANTS[:static_url]%>";
+      var BASE_URL = "<%= CONSTANTS[:base_url] %>";
+      var STATICS_URL  = "<%= CONSTANTS[:static_url] %>";
       var DATA = null;
-      var CSRF = "<%=CONSTANTS[:csrf][:secret]%>";
-      var CSRF_KEY = "<%=CONSTANTS[:csrf][:key]%>";
+      var CSRF = "<%= CONSTANTS[:csrf][:secret] %>";
+      var CSRF_KEY = "<%= CONSTANTS[:csrf][:key] %>";
+      var UPLOAD = "<%= CONSTANTS[:upload][:url] %>";
     </script>
     <%= load_css %>
   </head>

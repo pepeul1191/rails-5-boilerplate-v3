@@ -62,9 +62,9 @@ CONSTANTS = {
   },
   :upload => {
     :type => 'local',
+    :url => 'http://localhost:3000/uploads/',
     :local => {
       :path => '/home/pepe/Documentos/Canchas/backend/public/uploads/',
-      :server => 'http://localhost:3000/uploads/',
     },
     :ftp => {
       :dominio => '192.168.1.43',
