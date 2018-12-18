@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   skip_before_action :verify_authenticity_token
+  before_action :set_header
 
   def not_found
     case request.method
@@ -18,6 +19,11 @@ class ApplicationController < ActionController::Base
           ]
         }.to_json, status: 500
     end
+  end
+
+  private
+  def set_header
+    response.set_header('server', 'ruby, Ubuntu')
   end
 
   def get_content(path)

@@ -99,7 +99,7 @@ class Managment::DistrictController < ApplicationController
 		status = 200
 		begin
 			rpta = Managment::VWDistrict.where(
-          Sequel.like(:name, params[:name] + '%')
+          Sequel.like(:name, params[:nombre] + '%')
         ).limit(10).to_a.to_json
 		rescue Exception => e
 			rpta = {

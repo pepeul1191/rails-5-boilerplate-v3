@@ -36,7 +36,6 @@ Migraciones con DBMATE - managment:
 
 Fuentes:
 
-+ http://padrinorb.com/
-+ http://padrinorb.com/guides/generators/sub-applications/
-+ https://stackoverflow.com/questions/26594897/override-not-found-sinatra-application
-+ https://stackoverflow.com/questions/26515700/mysql-jdbc-driver-5-1-33-time-zone-issue
++ https://github.com/cyu/rack-cors/issues/119
++ https://edgeapi.rubyonrails.org/classes/ActionDispatch/Http/UploadedFile.html
++ https://guides.rubyonrails.org/command_line.html
