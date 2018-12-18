@@ -18,8 +18,8 @@ class LoginController < ApplicationController
     lang = get_language()
     _continue = true
     user = AccessLocal::User.where(
-      :usuario => params[:usuario],
-      :contrasenia => params[:contrasenia]
+      :usuario => params[:user],
+      :contrasenia => params[:pass]
     ).first()
     if user != nil
       if user.estado_usuario_id == 1
@@ -90,5 +90,19 @@ class LoginController < ApplicationController
       :lang => lang,
     }
     render template: 'login/reset', layout: 'blank'
+  end
+
+  def view
+    rpta = 'usuario : ' + session[:user] + '</br>' +
+      'estado : ' + session[:status] + '</br>' +
+      'tiempo : ' + session[:time] + '</br>' +
+      'sistema : ' + session[:system] + '</br>' +
+      '<a style="margin-top:10px; display: block;width: 115px;height: 20px;background: #4E9CAF;padding: 10px;text-align: center;border-radius: 0px;color: white;font-weight: bold;" href="' + CONSTANTS[:base_url] + 'login">Regresar</a>'
+    render :inline => rpta
+  end
+
+  def close
+    reset_session
+    redirect_to '/login'
   end
 end

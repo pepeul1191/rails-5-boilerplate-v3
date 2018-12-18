@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   get 'login' => 'login#index'
   get 'login/sign_in' => 'login#sign_in'
   get 'login/reset_password' => 'login#reset'
+  get 'login/view' => 'login#view'
+  get 'login/close' => 'login#close'
   # errores
   get 'error/access/:id' => 'error#access'
   get '*unmatched_route' => 'application#not_found'
