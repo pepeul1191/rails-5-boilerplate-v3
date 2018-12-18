@@ -15,27 +15,27 @@ var dataTablaClient = {
       edicion: false,
     },
     name: { // llave de REST
-      tipo: "text",
+      tipo: "label",
       estilos: "width: 100px;",
       edicion: true,
     },
     district: { // llave de REST
-      tipo: "text",
+      tipo: "label",
       estilos: "width: 250px;",
       edicion: true,
     },
     address: { // llave de REST
-      tipo: "text",
+      tipo: "label",
       estilos: "width: 200px;",
       edicion: true,
     },
     phone: { // llave de REST
-      tipo: "text",
+      tipo: "label",
       estilos: "width: 100px;",
       edicion: true,
     },
-    state: { // llave de REST
-      tipo: "text",
+    client_state: { // llave de REST
+      tipo: "label",
       estilos: "width: 100px;",
       edicion: true,
     },
@@ -43,7 +43,7 @@ var dataTablaClient = {
       estilos: "width: 80px; padding-left: 25px;"
     },
   },
-  tableKeys: ['id', 'name', 'district', 'address', 'phone', 'state'],
+  tableKeys: ['id', 'name', 'district', 'address', 'phone', 'client_state'],
   filaBotones: [
     {
       tipo: "href",
