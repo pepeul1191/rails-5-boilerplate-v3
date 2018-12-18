@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   post 'managment/district/save' => 'managment/district#save'
   # managment/client_state
   get 'managment/client_state/list' => 'managment/client_state#list'
+  post 'managment/client_state/save' => 'managment/client_state#save'
   # managment/service
   get 'managment/service/list' => 'managment/service#list'
   post 'managment/service/save' => 'managment/service#save'
