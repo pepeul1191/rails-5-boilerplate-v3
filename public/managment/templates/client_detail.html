@@ -1,0 +1,227 @@
+<h4 id="title-form">Agregar Cliente</h4>
+<hr>
+<label class="texto-der" id="mensajeRptaClient"></label>
+<h6>Detalle del Cliente</h6>
+<div class="row">
+  <div class="col-md-4">
+    <div class="form-group">
+      <label for="txtName">Nombre</label>
+      <input type="text" class="form-control" id="txtName" placeholder="" value="{{client.name}}">
+    </div>
+  </div>
+  <div class="col-md-2">
+    <div class="form-group">
+      <label for="txtPhone">Teléfono</label>
+      <input type="text" class="form-control" id="txtPhone" placeholder="" value="{{client.phone}}">
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="form-group">
+      <label for="cbmBank">Banco</label>
+      <select class="form-control" id="cbmBank" {{#if disabled}}disabled{{/if}}>
+        <option value="E"></option>
+        {{#fillSelect banks bank_id}}{{/fillSelect}}
+      </select>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="form-group">
+      <label for="txtAccount">Cuenta Bancaria</label>
+      <input type="text" class="form-control" id="txtAccount" placeholder="" value="{{client.account}}">
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-8">
+    <div class="form-group">
+      <label for="txtDescription">Descripción</label>
+      <input type="text" class="form-control" id="txtDescription" placeholder="" value="{{client.description}}">
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group" style="margin-bottom:10px">
+      <label style="width:100%">Logo</label>
+      <label id="imagen_id" class="oculto">E</label>
+      <input type="file" id="input_file" name="myFile" type="file" class="oculto"/>
+      <button id="searchLogo" class="btn btn-default btn-file pull-left"><i class="fa fa-file-image-o" aria-hidden="true"></i>Buscar </button>
+      <button id="uploadLogo" class="btn btn-default btn-file pull-left" disabled><i class="fa fa-upload" aria-hidden="true"></i>Subir </button>
+      <a target="_blank" id="viewLogo" class="btn btn-default btn-file pull-left" disabled><i class="fa fa-search" aria-hidden="true" style="margin-right: 5px"></i>Ver </a>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-5">
+    <div class="form-group">
+      <label for="txtAddress">Dirección</label>
+      <input type="text" class="form-control" id="txtAddress" placeholder="" value="{{client.address}}">
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="form-group">
+      <label for="txtDistrict">Distrito</label>
+      <input type="text" class="form-control" id="txtDistrict" placeholder="Distrito" value="{{client.district}}">
+       <ul id="listaDistritos" class="oculto sugerencia-contenedor"></ul>
+    </div>
+  </div>
+  <div class="col-md-2">
+    <div class="form-group">
+      <label for="txtLatitude">Latitud</label>
+      <input type="text" class="form-control" id="txtLatitude" placeholder="" value="{{client.latitude}}">
+    </div>
+  </div>
+  <div class="col-md-2">
+    <div class="form-group">
+      <label for="txtLongitude">Longitud</label>
+      <input type="text" class="form-control" id="txtLongitude" placeholder="" value="{{client.longitude}}">
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-3">
+    <div class="form-group">
+      <label for="cbmClientState">Estado del Cliente</label>
+      <select class="form-control" id="cbmClientState" {{#if disabled}}disabled{{/if}}>
+        <option value="E"></option>
+        {{#fillSelect clientStates client_state_id}}{{/fillSelect}}
+      </select>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="form-group pull-right" style="margin-top:25px;">
+      <button class="btn btn-default guardar-tabla" id="btnGuardarDetalleCliente"><i class="fa fa-check" style="margin-right:5px"></i>Guardar Detalle</button>
+    </div>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-md-12">
+    <h6>Usuario propietario de cancha</h6>
+  </div>
+  <div class="col-md-3">
+    <label class="texto-der" id="mensajeRptaUser"></label>
+    <div class="form-group">
+      <label for="txtUser">Usuario</label>
+      <input type="text" class="form-control" id="txtUser" placeholder="Usuario" value="{{client.user}}">
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="form-group pull-right" style="margin-top:42px;">
+      <button class="btn btn-default guardar-tabla" id="btnAsociarUsuario"><i class="fa fa-check" style="margin-right:5px"></i>Asociar Usuario</button>
+    </div>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-md-7" id="formTablePicture">
+    <h6>Lista de Imágenes</h6>
+    <label class="texto-der" id="mensajeRptaPicture"></label>
+    <input type="file" id="pictureFile" name="pictureFile" class="oculto">
+    <table class="table table-striped" style="" id="tablaPicture">
+      <thead>
+        <tr>
+          <th style="width: 10px; display:none;">id</th>
+          <th style="width: 200px;">Descripción</th>
+          <th style="width: 80px; padding-left: 17px !important;">Botones</th>
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <td colspan="1000" style="text-align:right">
+            <button class="btn btn-default agregar-fila"> <i class="fa fa-plus" style="margin-right:5px"></i>Agregar Registro</button>
+            <button class="btn btn-default guardar-tabla"> <i class="fa fa-check" style="margin-right:5px"></i>Guardar Cambios</button>
+          </td>
+        </tr>
+      </tfoot>
+      <tbody></tbody>
+    </table>
+  </div>
+  <div class="col-md-5">
+    <h6>Lista de Servicios</h6>
+    <label class="texto-der" id="mensajeRptaClientService"></label>
+    <table class="table table-striped" style="" id="tablaClientService">
+      <thead>
+        <tr>
+          <th style="width: 10px; display:none;">id</th>
+          <th style="width: 200px;">Nombre</th>
+          <th style="width: 80px; padding-left: 17px !important;">Botones</th>
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <td colspan="1000" style="text-align:right">
+            <button class="btn btn-default guardar-tabla"> <i class="fa fa-check" style="margin-right:5px"></i>Guardar Cambios</button>
+          </td>
+        </tr>
+      </tfoot>
+      <tbody></tbody>
+    </table>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-4" id="formTableClientService">
+    <h6>Lista de Canchas</h6>
+    <label class="texto-der" id="mensajeRptaClientField"></label>
+    <table class="table table-striped" style="" id="tablaClientField">
+      <thead>
+        <tr>
+          <th style="width: 10px; display:none;">id</th>
+          <th style="width: 150px;">Nombre</th>
+          <th style="width: 80px;">Costo/Hora</th>
+          <th style="width: 80px; padding-left: 17px !important;">Botones</th>
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <td colspan="1000" style="text-align:right">
+            <button class="btn btn-default agregar-fila"> <i class="fa fa-plus" style="margin-right:5px"></i>Agregar Registro</button>
+            <button class="btn btn-default guardar-tabla"> <i class="fa fa-check" style="margin-right:5px"></i>Guardar Cambios</button>
+          </td>
+        </tr>
+      </tfoot>
+      <tbody></tbody>
+    </table>
+  </div>
+  <div class="col-md-4 oculto" id="formTableFieldType">
+    <h6 class="subtitulo" style="margin-bottom:15px">Tipo de Cancha</h6>
+    <label class="texto-der" id="mensajeRptaFieldType"></label>
+    <table class="table table-striped" style="" id="tablaFieldType">
+      <thead>
+        <tr>
+          <th style="width: 200px;">Nombre</th>
+          <th style="width: 80px; padding-left: 17px !important;">Botones</th>
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <td colspan="1000" style="text-align:right">
+            <button class="btn btn-default guardar-tabla"> <i class="fa fa-check" style="margin-right:5px"></i>Guardar Cambios</button>
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+  <div class="col-md-8 oculto" id="formTableFieldSchedule">
+    <h6 class="subtitulo" style="margin-bottom:15px">Gestión de Calendarios de Cancha</h6>
+    <label class="texto-der" id="mensajeRptaFieldSchedule"></label>
+    <table class="table table-striped" style="" id="tablaFieldSchedule">
+      <thead>
+        <tr>
+          <th style="width: 10px; display:none;">id</th>
+          <th style="width: 100px;">Hora Inicio</th>
+          <th style="width: 100px;">Hora Fin</th>
+          <th style="width: 200px;">Fecha Inicio</th>
+          <th style="width: 200px;">Fecha Fin</th>
+          <th style="width: 80px; padding-left: 17px !important;">Botones</th>
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <td colspan="1000" style="text-align:right">
+            <button class="btn btn-default agregar-fila"> <i class="fa fa-plus" style="margin-right:5px"></i>Agregar Registro</button>
+          </td>
+        </tr>
+      </tfoot>
+      <tbody></tbody>
+    </table>
+  </div>
+</div>
