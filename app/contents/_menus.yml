@@ -1,0 +1,19 @@
+sp:
+  managment:
+    - name: Accesos
+      url: access/
+      icon: ''
+    - name: Administración
+      url: managment/
+      icon: ''
+      subtitles:
+        - name: Maestros
+          items:
+            - name: Gestión de Ubicaciones
+              url: managment/#/location
+            - name: Gestión de Servicios
+              url: managment/#/service
+            - name: Gestión de Tipos de Canchas
+              url: managment/#/field_type
+            - name: Gestión de Servicios
+              url: managment/#/bank

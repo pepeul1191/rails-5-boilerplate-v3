@@ -29,7 +29,7 @@ class LoginController < ApplicationController
         session[:user] = params[:user]
         session[:system] = 'managment'
         session[:time] = Time.now.strftime('%Y-%m-%d %H:%M:%S')
-        redirect_to CONSTANTS[:base_url]
+        redirect_to CONSTANTS[:base_url] + 'managment'
       else
         message = 'Usuario no se encuentra activo'
       end

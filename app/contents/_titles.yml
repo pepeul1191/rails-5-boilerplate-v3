@@ -3,3 +3,4 @@ sp:
   login_index: Bienvenido
   login_sign_in: Crear Cuenta
   login_reset: Restablecer Contraseña
+  managment_index: 'Administración'
