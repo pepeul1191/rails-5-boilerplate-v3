@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   post 'file/upload' => 'file#upload'
   # managment
   get 'managment/' => 'managment/view#index'
+  get 'managment/user' => 'managment/view#user'
   # managment/department
   get 'managment/department/list' => 'managment/department#list'
   post 'managment/department/save' => 'managment/department#save'

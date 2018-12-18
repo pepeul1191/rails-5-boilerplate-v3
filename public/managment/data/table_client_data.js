@@ -34,7 +34,7 @@ var dataTablaClient = {
       estilos: "width: 100px;",
       edicion: true,
     },
-    client_state: { // llave de REST
+    state: { // llave de REST
       tipo: "label",
       estilos: "width: 100px;",
       edicion: true,
@@ -43,7 +43,7 @@ var dataTablaClient = {
       estilos: "width: 80px; padding-left: 25px;"
     },
   },
-  tableKeys: ['id', 'name', 'district', 'address', 'phone', 'client_state'],
+  tableKeys: ['id', 'name', 'district', 'address', 'phone', 'state'],
   filaBotones: [
     {
       tipo: "href",
