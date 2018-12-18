@@ -10,9 +10,7 @@
     <script type="text/javascript">
       var BASE_URL = "<%=CONSTANTS[:base_url]%>";
       var STATICS_URL  = "<%=CONSTANTS[:static_url]%>";
-      var MODULOS_JSON = JSON.parse('<%=raw @locals[:modulos]%>');
-      var ITEMS_JSON = JSON.parse('<%=raw @locals[:items]%>');
-      var DATA = JSON.parse('<%=raw @locals[:data]%>');
+      var DATA = null;
       var CSRF = "<%=CONSTANTS[:csrf][:secret]%>";
       var CSRF_KEY = "<%=CONSTANTS[:csrf][:key]%>";
     </script>
@@ -53,35 +51,20 @@
         <h1><i class="fa fa-futbol-o h1" aria-hidden="true"></i>Administración de Canchas</h1>
         <%== @locals[:html_modules] %>
       </nav>
-    </div>
-    <!-- Fin Header -->
-    </script>
-    <script id="breadcrumb-template" type="text/x-handlebars-template">
-      <nav>
-        <h1><i class="fa fa-umbrella h1" aria-hidden="true"></i>Gestor de Conentidos - COA</h1>
-        {{{menuModulos}}}
-      </nav>
-    </script>
-    <script id="contenido-template" type="text/x-handlebars-template">
       <div id="body-app" class="row">
         <aside class="col-md-2">
-          {{{menuSubModulos}}}
+          <%== @locals[:html_items] %>
         </aside>
         <section class="col-md-10" id="workspace">
           <!-- Inicio Yield-->
-          {{> yield}}
+          <%= yield %>
           <!-- Fin Yield-->
         </section>
       </div>
-    </script>
-    <script id="yield" type="text/x-handlebars-template">
-      <%= yield %>
-    </script>
-    <script id="footer-template" type="text/x-handlebars-template">
       <footer>
         <p>Powered by: <a href="http://softweb.pe/">Software Web Perú</a> © 2011-2018 </p>
       </footer>
-    </script>
+    </div>
     <%= load_js %>
   </body>
 </html>

@@ -35,7 +35,22 @@ module ApplicationHelper
     rpta
   end
 
-  def menu_items
-
+  def self.menu_items(menu, url_module_active)
+    rpta = ''
+    menu.each do |m|
+      if url_module_active == m['url']
+        subtitles = m['subtitles']
+        subtitles.each do |s|
+          t = '<li class="li-submodulo">' + s['name'] + '</li>'
+          rpta = rpta + t
+          items = s['items']
+          items.each do |i|
+            t = '<li class="li-item"><a href="' + CONSTANTS[:base_url] + i['url'] + '">' + i['name'] + '</a></li>'
+            rpta = rpta + t
+          end
+        end
+      end
+    end
+    rpta
   end
 end
