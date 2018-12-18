@@ -1,0 +1,2 @@
+module Managment::DistrictHelper
+end

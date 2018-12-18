@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get 'managment/' => 'managment/view#index'
   get 'managment/department/list' => 'managment/department#list'
   get 'managment/province/list/:deparment_id' => 'managment/province#list'
+  get 'managment/district/list/:province_id' => 'managment/district#list'
   # access
   get 'access/' => 'access/view#index'
   # errores
