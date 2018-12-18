@@ -24,7 +24,7 @@ var dataTablaPicture = {
       estilos: "width: 80px; padding-left: 7px;"
     },
   },
-  fileServerUrl: 'http://localhost:8000/uploads/',
+  fileServerUrl: UPLOAD,
   tableKeys: ['id', 'description', ],
   filaBotones: [
     {

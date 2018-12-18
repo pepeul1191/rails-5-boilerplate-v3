@@ -22,6 +22,8 @@ Rails.application.routes.draw do
   # managment/province
   get 'managment/province/list/:deparment_id' => 'managment/province#list'
   post 'managment/province/save' => 'managment/province#save'
+  # managment/picture
+  get 'managment/picture/list/:client_id' => 'managment/picture#list_by_client'
   # managment/district
   get 'managment/district/list/:province_id' => 'managment/district#list'
   get 'managment/district/get/:district_id' => 'managment/district#name_by_id'
