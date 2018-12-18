@@ -3,6 +3,13 @@ sp:
     - name: Accesos
       url: access/
       icon: ''
+      subtitles:
+        - name: Maestros
+          items:
+            - name: Gestión de Permisos
+              url: managment/#/permision
+            - name: Gestión de Roles
+              url: access/#/rols
     - name: Administración
       url: managment/
       icon: ''

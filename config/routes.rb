@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   get 'login/close' => 'login#close'
   # managment
   get 'managment/' => 'managment/view#index'
+  # access
+  get 'access/' => 'access/view#index'
   # errores
   get 'error/access/:id' => 'error#access'
   get '*unmatched_route' => 'application#not_found'
