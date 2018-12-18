@@ -93,4 +93,44 @@ class Managment::DistrictController < ApplicationController
     end
     render :plain => rpta, :status => status
   end
+
+  def search
+		rpta = nil
+		status = 200
+		begin
+			rpta = Managment::VWDistrict.where(
+          Sequel.like(:name, params[:name] + '%')
+        ).limit(10).to_a.to_json
+		rescue Exception => e
+			rpta = {
+				:tipo_mensaje => 'error',
+				:mensaje => [
+					'Se ha producido un error en buscar coincidencias en los nombres de los distritos',
+					e.message
+				]
+			}.to_json
+			status = 500
+		end
+		render :plain => rpta, :status => status
+	end
+
+  	def name_by_id
+		rpta = nil
+		status = 200
+		begin
+			temp = Managment::VWDistrict.select(:name).where(
+        :id => params[:district_id]).first
+			rpta = temp.name
+		rescue Exception => e
+			rpta = {
+				:tipo_mensaje => 'error',
+				:mensaje => [
+					'Se ha producido un error en buscar el nombre del distrito',
+					e.message
+				]
+			}.to_json
+			status = 500
+		end
+		render :plain => rpta, :status => status
+	end
 end

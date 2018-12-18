@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   get 'managment/province/list/:deparment_id' => 'managment/province#list'
   post 'managment/province/save' => 'managment/province#save'
   get 'managment/district/list/:province_id' => 'managment/district#list'
+  get 'managment/district/get/:district_id' => 'managment/district#name_by_id'
+  get 'managment/district/search' => 'managment/district#search'
   post 'managment/district/save' => 'managment/district#save'
   # access
   get 'access/' => 'access/view#index'
