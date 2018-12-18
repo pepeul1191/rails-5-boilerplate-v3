@@ -6,4 +6,4 @@ ADD notifications BOOLEAN;
 -- migrate:down
 
 ALTER TABLE players
-DROP COLUMN client_state_id;
+DROP COLUMN notifications;

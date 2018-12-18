@@ -10,14 +10,19 @@ Rails.application.routes.draw do
   get 'login/close' => 'login#close'
   # managment
   get 'managment/' => 'managment/view#index'
+  # managment/department
   get 'managment/department/list' => 'managment/department#list'
   post 'managment/department/save' => 'managment/department#save'
+  # managment/province
   get 'managment/province/list/:deparment_id' => 'managment/province#list'
   post 'managment/province/save' => 'managment/province#save'
+  # managment/district
   get 'managment/district/list/:province_id' => 'managment/district#list'
   get 'managment/district/get/:district_id' => 'managment/district#name_by_id'
   get 'managment/district/search' => 'managment/district#search'
   post 'managment/district/save' => 'managment/district#save'
+  # managment/service
+  get 'managment/service/list' => 'managment/service#list'
   # access
   get 'access/' => 'access/view#index'
   # errores
