@@ -8,6 +8,10 @@ Nuevo controlador:
 
     $ rails generate controller error
 
+Nuevo modelo
+
+    $ rails generate model access_local/User
+
 ### Migraciones
 
 Migraciones con DBMATE - accesos:
