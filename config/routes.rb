@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   get 'managment/client/service/:client_id' => 'managment/client#service_list'
   post 'managment/client/service/save' => 'managment/client#service_save'
   get 'managment/client/field/:client_id' => 'managment/client#field_list'
+  post 'managment/client/field/save' => 'managment/client#field_save'
   # managment/province
   get 'managment/province/list/:deparment_id' => 'managment/province#list'
   post 'managment/province/save' => 'managment/province#save'
