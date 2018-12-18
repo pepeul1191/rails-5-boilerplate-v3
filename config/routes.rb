@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get 'managment/department/list' => 'managment/department#list'
   post 'managment/department/save' => 'managment/department#save'
   get 'managment/province/list/:deparment_id' => 'managment/province#list'
+  post 'managment/province/save' => 'managment/province#save'
   get 'managment/district/list/:province_id' => 'managment/district#list'
   # access
   get 'access/' => 'access/view#index'
