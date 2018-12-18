@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   get 'login/reset_password' => 'login#reset'
   get 'login/view' => 'login#view'
   get 'login/close' => 'login#close'
+  # file
+  post 'file/upload' => 'file#upload'
   # managment
   get 'managment/' => 'managment/view#index'
   # managment/department

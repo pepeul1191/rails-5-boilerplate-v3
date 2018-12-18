@@ -24,7 +24,7 @@ var dataTablaBanner = {
       estilos: "width: 80px; padding-left: 25px;"
     },
   },
-  fileServerUrl: 'http://localhost:8000/uploads/',
+  fileServerUrl: 'http://localhost:3000/uploads/',
   tableKeys: ['id', 'description'],
   filaBotones: [
     {

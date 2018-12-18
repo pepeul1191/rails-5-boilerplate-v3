@@ -35,3 +35,5 @@ dist
 .DS_Store
 *.ods#
 Gemfile.lock
+
+uploads

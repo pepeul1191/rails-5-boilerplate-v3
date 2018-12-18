@@ -63,8 +63,8 @@ CONSTANTS = {
   :upload => {
     :type => 'local',
     :local => {
-      :path => '/home/pepe/Documentos/Canchas/uploads/public/uploads/',
-      :server => 'http://localhost:8000/uploads/',
+      :path => '/home/pepe/Documentos/Canchas/backend/public/uploads/',
+      :server => 'http://localhost:3000/uploads/',
     },
     :ftp => {
       :dominio => '192.168.1.43',
@@ -77,4 +77,4 @@ CONSTANTS = {
   },
 }
 
-RAILS_ROOT = File.expand_path File.dirname(__FILE__) + '/../..' 
+RAILS_ROOT = File.expand_path File.dirname(__FILE__) + '/../..'
