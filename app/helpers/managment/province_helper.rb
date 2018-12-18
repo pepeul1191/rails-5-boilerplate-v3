@@ -1,0 +1,2 @@
+module Managment::ProvinceHelper
+end
