@@ -27,6 +27,12 @@ Rails.application.routes.draw do
   # managment/field_type
   get 'managment/field_type/list' => 'managment/field_type#list'
   post 'managment/field_type/save' => 'managment/field_type#save'
+  # managment/bank
+  get 'managment/bank/list' => 'managment/bank#list'
+  post 'managment/bank/save' => 'managment/bank#save'
+  # managment/banner
+  get 'managment/banner/list' => 'managment/banner#list'
+  post 'managment/banner/save' => 'managment/banner#save'
   # access
   get 'access/' => 'access/view#index'
   # errores
