@@ -36,11 +36,14 @@ class Schedules::ScheduleController < ApplicationController
       end
       date_init = DateTime.new(date_init_array[2].to_i, date_init_array[1].to_i, date_init_array[0].to_i)
       date_end = DateTime.new(date_end_array[2].to_i, date_end_array[1].to_i, date_end_array[0].to_i)
-      puts '1 +++++++++++++++++++++++++++++++++++++'
-      s = Schedules::ScheduleHelper.create(date_init, field_id, hour_init, hour_end, transaction)
-      puts '2 +++++++++++++++++++++++++++++++++++++'
-      puts s.save
-      puts '3 +++++++++++++++++++++++++++++++++++++'
+      date_temp = DateTime.new(date_init.year, date_init.month, date_init.day)
+      schedules = []
+      while date_end >= date_temp do
+        s = Schedules::ScheduleHelper.create(date_temp, field_id, hour_init, hour_end, transaction)
+        schedules.push(s.as_document)
+        date_temp = date_temp.next_day(1)
+      end
+      Schedules::Schedule.collection.insert_many(schedules)
     rescue Exception => e
       puts e.backtrace
       rpta = {

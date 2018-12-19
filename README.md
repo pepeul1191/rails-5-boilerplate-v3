@@ -39,3 +39,4 @@ Fuentes:
 + https://github.com/cyu/rack-cors/issues/119
 + https://edgeapi.rubyonrails.org/classes/ActionDispatch/Http/UploadedFile.html
 + https://guides.rubyonrails.org/command_line.html
++ https://docs.mongodb.com/mongoid/master/tutorials/mongoid-persistence/index.html
