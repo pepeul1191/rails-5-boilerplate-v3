@@ -379,18 +379,19 @@ var ClientDetailView = Backbone.View.extend({
 				},
 	      async: false,
 	      success: function(data){
+					data = JSON.parse(data);
 					$("#mensajeRptaFieldSchedule").addClass("color-success");
 					$("#mensajeRptaFieldSchedule").removeClass("color-warning");
 					$("#mensajeRptaFieldSchedule").removeClass("color-danger");
-					$("#mensajeRptaFieldSchedule").html("Se ha creado un calendario");
-					t[0].innerHTML = data;
+					$("#mensajeRptaFieldSchedule").html(data.mensaje[0]);
+					t[0].innerHTML = data.mensaje[1];
 	      },
 	      error: function(xhr, status, error){
 					$("#mensajeRptaFieldSchedule").removeClass("color-success");
 					$("#mensajeRptaFieldSchedule").removeClass("color-warning");
 					$("#mensajeRptaFieldSchedule").addClass("color-danger");
 					var m = JSON.parse(xhr.responseText);
-					$("#mensajeRptaFieldSchedule").html(m.mensaje[0]);
+					$("#mensajeRptaFieldSchedule").html(m.mensaje[1]);
 					console.error(m.mensaje[1]);
 	      }
 	    });
@@ -412,10 +413,12 @@ var ClientDetailView = Backbone.View.extend({
 			},
 			async: false,
 			success: function(data){
+				data = JSON.parse(data);
 				$("#mensajeRptaFieldSchedule").addClass("color-success");
 				$("#mensajeRptaFieldSchedule").removeClass("color-warning");
 				$("#mensajeRptaFieldSchedule").removeClass("color-danger");
-				$("#mensajeRptaFieldSchedule").html("Se ha asociado el usuaurio al cliente");
+				$("#mensajeRptaFieldSchedule").html(data.mensaje[0]);
+				$(event.target.parentElement.parentElement).remove();
 			},
 			error: function(xhr, status, error){
 				borrar_fila = false;

@@ -10,16 +10,11 @@ class Schedules::ScheduleController < ApplicationController
       transaction = data['transaction']
       date_init_array = data['date_init'].split('/')
       date_end_array = data['date_end'].split('/')
-      if transaction.length != 30 # edit
-        transaction = random_string(30)
-      end
       date_init = DateTime.new(date_init_array[2].to_i, date_init_array[1].to_i, date_init_array[0].to_i)
       date_end = DateTime.new(date_end_array[2].to_i, date_end_array[1].to_i, date_end_array[0].to_i)
       date_temp = DateTime.new(date_init.year, date_init.month, date_init.day)
-      #validate if schedule exist between dates to continues, else error
-      pipeline = Schedules::ScheduleHelper.pipeline_check_calendar_in_range(field_id, date_init, date_end)
-      in_range = JSON.parse(Schedules::Schedule.collection.aggregate(pipeline).to_json)
-      if in_range == []
+      if transaction.length != 30 # create, else edit
+        transaction = random_string(30)
         schedules = []
         while date_end >= date_temp do
           s = Schedules::ScheduleHelper.create(date_temp, field_id, hour_init, hour_end, transaction)
@@ -27,20 +22,36 @@ class Schedules::ScheduleController < ApplicationController
           date_temp = date_temp.next_day(1)
         end
         Schedules::Schedule.collection.insert_many(schedules)
+        rpta = {
+          :tipo_mensaje => 'success',
+          :mensaje => [
+            'Se ha creado un nuevo calendario',
+            transaction
+          ]
+        }.to_json
       else
-        puts '1 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
-        puts transaction
-        Schedules::Schedule.delete_all({
-          :transaction => transaction
-        })
-        puts '2 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
-        schedules = []
-        while date_end >= date_temp do
-          s = Schedules::ScheduleHelper.create(date_temp, field_id, hour_init, hour_end, transaction)
-          schedules.push(s.as_document)
-          date_temp = date_temp.next_day(1)
+        #validate if schedule exist between dates to continues, else error
+        pipeline = Schedules::ScheduleHelper.pipeline_check_calendar_in_range(field_id, date_init, date_end)
+        in_range = JSON.parse(Schedules::Schedule.collection.aggregate(pipeline).to_json)
+        if in_range != []
+          Schedules::Schedule.delete_all({
+            :transaction => transaction
+          })
+          schedules = []
+          while date_end >= date_temp do
+            s = Schedules::ScheduleHelper.create(date_temp, field_id, hour_init, hour_end, transaction)
+            schedules.push(s.as_document)
+            date_temp = date_temp.next_day(1)
+          end
+          Schedules::Schedule.collection.insert_many(schedules)
+          rpta = {
+            :tipo_mensaje => 'success',
+            :mensaje => [
+              'Se ha editado un calendario',
+              transaction
+            ]
+          }.to_json
         end
-        Schedules::Schedule.collection.insert_many(schedules)
       end
     rescue Exception => e
       rpta = {
