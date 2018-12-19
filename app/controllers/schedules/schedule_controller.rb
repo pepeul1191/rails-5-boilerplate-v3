@@ -1,25 +1,4 @@
 class Schedules::ScheduleController < ApplicationController
-  def list
-    rpta = nil
-    status = 200
-    begin
-      Schedules::Schedule.all.where(field_id: params[:field_id]).each do |schedule|
-        
-      end
-      rpta = ''
-    rescue Exception => e
-      rpta = {
-        :tipo_mensaje => 'error',
-        :mensaje => [
-          'Se ha producido un error en listar los calendarios',
-          e.message
-        ]
-      }.to_json
-      status = 500
-    end
-    render :plain => rpta, :status => status
-  end
-
   def generate
     rpta = nil
     status = 200
@@ -50,6 +29,26 @@ class Schedules::ScheduleController < ApplicationController
         :tipo_mensaje => 'error',
         :mensaje => [
           'Se ha producido un error en generar el calendario',
+          e.message
+        ]
+      }.to_json
+      status = 500
+    end
+    render :plain => rpta, :status => status
+  end
+
+  def list_by_field_id
+    rpta = nil
+    status = 200
+    begin
+      field_id = params[:field_id].to_i
+      pipeline = Schedules::ScheduleHelper.pipeline_managment_schedule_list_by_field_id(field_id)
+      rpta = Schedules::Schedule.collection.aggregate(pipeline).to_json
+    rescue Exception => e
+      rpta = {
+        :tipo_mensaje => 'error',
+        :mensaje => [
+          'Se ha producido un error en listar los calendarios',
           e.message
         ]
       }.to_json
