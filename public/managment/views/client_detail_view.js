@@ -427,7 +427,7 @@ var ClientDetailView = Backbone.View.extend({
 				$("#mensajeRptaFieldSchedule").removeClass("color-success");
 				$("#mensajeRptaFieldSchedule").removeClass("color-warning");
 				$("#mensajeRptaFieldSchedule").addClass("color-danger");
-				$("#mensajeRptaFieldSchedule").html(m.mensaje[0]);
+				$("#mensajeRptaFieldSchedule").html(m.mensaje[0] + ". " + m.mensaje[1]);
 			}
 		});
 	},
