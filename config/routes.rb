@@ -57,6 +57,7 @@ Rails.application.routes.draw do
   # managment/schedule
   get 'managment/schedule/list/:field_id' => 'schedules/schedule#list_by_field_id'
   post 'managment/schedule/generate' => 'schedules/schedule#generate'
+  post 'managment/schedule/delete' => 'schedules/schedule#delete'
   # access
   get 'access/' => 'access/view#index'
   # errores

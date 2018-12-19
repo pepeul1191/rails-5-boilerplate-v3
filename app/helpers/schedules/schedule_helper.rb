@@ -11,8 +11,11 @@ module Schedules::ScheduleHelper
   def self.generate_hours(day, hour_init, hour_end)
     hours = []
     (hour_init..hour_end).each do |h|
+      reservation = Schedules::Reservation.new
+      reservation.status = 'free'
       hour = Schedules::Hour.new
       hour.hour = DateTime.new(day.year, day.month, day.day, h)
+      hour.reservation = reservation
       hours.push(hour)
     end
     hours

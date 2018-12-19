@@ -11,7 +11,7 @@ var dataTablaFieldSchedule = {
   urlGuardar: BASE_URL + "managment/field_schedule/save",
   urlListar: BASE_URL + "managment/field_schedule/list",
   fila: {
-    id: { // llave de REST
+    _id: { // llave de REST
       tipo: "td_id",
       estilos: "color: blue; display:none",
       edicion: false,
@@ -40,7 +40,7 @@ var dataTablaFieldSchedule = {
       estilos: "width: 80px; padding-left: 25px;"
     },
   },
-  tableKeys: ['id', 'hour_init', 'hour_end','date_init', 'date_end'],
+  tableKeys: ['_id', 'hour_init', 'hour_end','date_init', 'date_end'],
   filaBotones: [
     {
       tipo: "i",

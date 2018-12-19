@@ -62,4 +62,31 @@ class Schedules::ScheduleController < ApplicationController
     end
     render :plain => rpta, :status => status
   end
+
+  def delete
+    rpta = nil
+    status = 200
+    begin
+      transaction_id = params[:transaction_id]
+      Schedules::Schedule.delete_all({
+        :transaction => transaction_id
+      })
+      rpta = {
+				:tipo_mensaje => 'success',
+				:mensaje => [
+					'Se ha eliminado el calendario',
+				]
+			}.to_json
+    rescue Exception => e
+      rpta = {
+        :tipo_mensaje => 'error',
+        :mensaje => [
+          'Se ha producido un error en listar los calendarios',
+          e.message
+        ]
+      }.to_json
+      status = 500
+    end
+    render :plain => rpta, :status => status
+  end
 end

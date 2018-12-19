@@ -87,6 +87,7 @@ var ClientDetailView = Backbone.View.extend({
 		"click #tablaFieldSchedule > tfoot > tr > td > button.agregar-fila": "agregarFilaSchedule",
 		"click #tablaFieldSchedule > tbody > tr > td > i.scheduleGenerate": "generarSchedule",
 		"keyup #tablaFieldSchedule > tbody > tr > td > input.text": "inputTextEscribirFieldSchedule",
+		"click #tablaFieldSchedule > tbody > tr > td > i.quitar-fila": "quitarFilaSchedule",
 		// client user
 		"click #btnAsociarUsuario": "asociarUsuario",
   },
@@ -396,6 +397,36 @@ var ClientDetailView = Backbone.View.extend({
 		}else{
 			alert();
 		}
+	},
+	quitarFilaSchedule:function(event){
+		var transaction_id = event.target.parentElement.parentElement.childNodes[0].innerHTML;
+		var borrar_fila = true;
+		$.ajax({
+			type: "POST",
+			url: BASE_URL + "managment/schedule/delete",
+			data: {
+				transaction_id: transaction_id,
+			},
+			headers: {
+				[CSRF_KEY]: CSRF,
+			},
+			async: false,
+			success: function(data){
+				$("#mensajeRptaFieldSchedule").addClass("color-success");
+				$("#mensajeRptaFieldSchedule").removeClass("color-warning");
+				$("#mensajeRptaFieldSchedule").removeClass("color-danger");
+				$("#mensajeRptaFieldSchedule").html("Se ha asociado el usuaurio al cliente");
+			},
+			error: function(xhr, status, error){
+				borrar_fila = false;
+				console.error(xhr.responseText);
+				var m = JSON.parse(xhr.responseText);
+				$("#mensajeRptaFieldSchedule").removeClass("color-success");
+				$("#mensajeRptaFieldSchedule").removeClass("color-warning");
+				$("#mensajeRptaFieldSchedule").addClass("color-danger");
+				$("#mensajeRptaFieldSchedule").html(m.mensaje[0]);
+			}
+		});
 	},
 	//asociar usuario
 	asociarUsuario: function(event){
