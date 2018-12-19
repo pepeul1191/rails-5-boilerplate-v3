@@ -1,6 +1,14 @@
-db.schedules.find(
+db.schedules.aggregate([
   {
-    "hours.reservation.status" : "free", 
-    "transaction" : "FVMwGVvfXADmMlizHHfHnAJjGAwwDk",
-  }
-).count();
+    $match: {
+      $and: [
+        {
+          "hours.reservation.status" : "free"
+        },
+        {
+          "transaction" : "PAEPGrPDRLfxySJrPIjXApXZQkUQwL",
+        },
+      ],
+    },
+  },
+]); 

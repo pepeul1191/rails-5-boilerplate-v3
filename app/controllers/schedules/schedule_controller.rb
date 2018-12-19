@@ -28,7 +28,19 @@ class Schedules::ScheduleController < ApplicationController
         end
         Schedules::Schedule.collection.insert_many(schedules)
       else
-        raise Exception, 'Rango del calendario a crear ya usado'
+        puts '1 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
+        puts transaction
+        Schedules::Schedule.delete_all({
+          :transaction => transaction
+        })
+        puts '2 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
+        schedules = []
+        while date_end >= date_temp do
+          s = Schedules::ScheduleHelper.create(date_temp, field_id, hour_init, hour_end, transaction)
+          schedules.push(s.as_document)
+          date_temp = date_temp.next_day(1)
+        end
+        Schedules::Schedule.collection.insert_many(schedules)
       end
     rescue Exception => e
       rpta = {
@@ -68,9 +80,16 @@ class Schedules::ScheduleController < ApplicationController
     status = 200
     begin
       transaction_id = params[:transaction_id]
-      Schedules::Schedule.delete_all({
-        :transaction => transaction_id
-      })
+      #validate if schedule not have a reservation to continues, else error
+      pipeline = Schedules::ScheduleHelper.pipeline_check_reservations(transaction_id)
+      reservations = Schedules::Schedule.collection.aggregate(pipeline).count
+      if reservations == 0
+        Schedules::Schedule.delete_all({
+          :transaction => transaction_id
+        })
+      else
+        raise Exception, 'Calendario a borrar ya tiene una reservación realizada'
+      end
       rpta = {
 				:tipo_mensaje => 'success',
 				:mensaje => [

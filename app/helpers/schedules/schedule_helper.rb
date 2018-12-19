@@ -43,6 +43,23 @@ module Schedules::ScheduleHelper
     ]
   end
 
+  def self.pipeline_check_reservations(transaction_id)
+    [
+      {
+        '$match': {
+          '$and': [
+            {
+              'hours.reservation.status': 'reservated'
+            },
+            {
+              'transaction': transaction_id,
+            },
+          ],
+        },
+      },
+    ]
+  end
+
   def self.pipeline_managment_schedule_list_by_field_id(field_id)
     [
       {
