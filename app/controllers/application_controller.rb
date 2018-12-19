@@ -37,4 +37,9 @@ class ApplicationController < ActionController::Base
   def get_language()
     'sp'
   end
+
+  def random_string(n)
+    o = [('a'..'z'), ('A'..'Z')].map(&:to_a).flatten
+    (0...n).map { o[rand(o.length)] }.join
+  end
 end

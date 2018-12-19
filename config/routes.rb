@@ -54,6 +54,9 @@ Rails.application.routes.draw do
   # managment/banner
   get 'managment/banner/list' => 'managment/banner#list'
   post 'managment/banner/save' => 'managment/banner#save'
+  # managment/schedule
+  get 'managment/schedule/list/:field_id' => 'schedules/schedule#list'
+  post 'managment/schedule/generate' => 'schedules/schedule#generate'
   # access
   get 'access/' => 'access/view#index'
   # errores
