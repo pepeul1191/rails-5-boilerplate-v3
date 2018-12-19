@@ -18,11 +18,33 @@ module Schedules::ScheduleHelper
     hours
   end
 
+  def self.pipeline_check_calendar_in_range(field_id, date_init, date_end)
+    [
+      {
+        '$match': {
+          '$and': [
+            {
+              'field_id': field_id
+            },
+            { 'day': {
+                '$gte': date_init,
+                '$lte': date_end
+              }
+            },
+          ],
+        },
+      },
+      {
+        '$count': 'dates'
+      },
+    ]
+  end
+
   def self.pipeline_managment_schedule_list_by_field_id(field_id)
     [
       {
         '$match': {
-          'field_id': field_id.to_i
+          'field_id': field_id
         },
       },
       {

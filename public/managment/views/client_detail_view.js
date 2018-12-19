@@ -384,13 +384,13 @@ var ClientDetailView = Backbone.View.extend({
 					$("#mensajeRptaFieldSchedule").html("Se ha creado un calendario");
 					t[0].innerHTML = data;
 	      },
-	      error: function(error){
+	      error: function(xhr, status, error){
 					$("#mensajeRptaFieldSchedule").removeClass("color-success");
 					$("#mensajeRptaFieldSchedule").removeClass("color-warning");
 					$("#mensajeRptaFieldSchedule").addClass("color-danger");
-					var data = JSON.parse(error);
-					$("#mensajeRptaFieldSchedule").html(data["mensaje"][0]);
-	        console.log(error);
+					var m = JSON.parse(xhr.responseText);
+					$("#mensajeRptaFieldSchedule").html(m.mensaje[0]);
+					console.error(m.mensaje[1]);
 	      }
 	    });
 		}else{
