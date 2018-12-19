@@ -3,8 +3,8 @@ class Schedules::ScheduleController < ApplicationController
     rpta = nil
     status = 200
     begin
-      Schedules::Schedule.all.where(field_id: params[:field_id]).each do |test|
-        puts test.to_json
+      Schedules::Schedule.all.where(field_id: params[:field_id]).each do |schedule|
+        
       end
       rpta = ''
     rescue Exception => e
