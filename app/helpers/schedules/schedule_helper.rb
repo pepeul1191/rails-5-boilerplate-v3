@@ -38,7 +38,12 @@ module Schedules::ScheduleHelper
         },
       },
       {
-        '$count': 'dates'
+        '$group': {
+          '_id': "$transaction",
+          'count': {
+            '$sum': 1
+          }
+        }
       },
     ]
   end
