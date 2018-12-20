@@ -40,3 +40,4 @@ Fuentes:
 + https://edgeapi.rubyonrails.org/classes/ActionDispatch/Http/UploadedFile.html
 + https://guides.rubyonrails.org/command_line.html
 + https://docs.mongodb.com/mongoid/master/tutorials/mongoid-persistence/index.html
++ https://stackoverflow.com/questions/40921032/way-to-load-folder-as-module-constant-in-rails-app-directory
