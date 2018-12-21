@@ -32,6 +32,13 @@ Migraciones con DBMATE - managment:
     $ mysqldump -u root -p canchas > db/managment/canchas.sql
     $ mysql -u root -p canchas < db/managment/canchas.sql
 
+### Uso de services
+
+    c = Cipher::CipherService.new
+    c.encrypt(params[:pass], CONSTANTS[:key])
+    puts c.response.body
+    puts c.response.code
+
 ---
 
 Fuentes:

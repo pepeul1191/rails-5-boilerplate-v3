@@ -1,5 +1,3 @@
-class Access::UserService
-  def initialize
-    puts '1 ++++++++++++++++++++++++++++++++++++++++++++'
-  end
+class Access::UserService < ApplicationService
+
 end
