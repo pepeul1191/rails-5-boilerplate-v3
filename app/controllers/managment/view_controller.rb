@@ -1,7 +1,9 @@
 class Managment::ViewController < ApplicationController
   def index
-    Services::Access::UserService.new
-    Services::Access::LogService.new
+    Access::UserService.new
+    Access::LogService.new
+    #Lib::Cipher::encrypt
+    #Lib::Cipher::decrypt
     lang = get_language()
     menu = get_content('_menus')[lang]['managment']
     html_modules = ApplicationHelper::menu_modules(menu, 'managment/')

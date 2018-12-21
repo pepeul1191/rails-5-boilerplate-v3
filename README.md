@@ -41,3 +41,4 @@ Fuentes:
 + https://guides.rubyonrails.org/command_line.html
 + https://docs.mongodb.com/mongoid/master/tutorials/mongoid-persistence/index.html
 + https://stackoverflow.com/questions/40921032/way-to-load-folder-as-module-constant-in-rails-app-directory
++ https://stackoverflow.com/questions/42493686/how-to-require-modules-in-rails
