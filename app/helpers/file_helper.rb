@@ -1,16 +1,11 @@
 module FileHelper
-  def self.generate_random
-    o = [('a'..'z'), ('A'..'Z')].map(&:to_a).flatten
-    (0...50).map { o[rand(o.length)] }.join
-  end
-
   def self.save(file)
     rpta = ""
     begin
       url = ''
       file_name_array = file.path.split('/')
       extension = file_name_array.last.split('.').last
-      new_name = self.generate_random + '.' + extension
+      new_name = Assets::Randito.string_number(50) + '.' + extension
       if CONSTANTS[:upload][:type] == 'local'
         FileUtils.mv(file.path, CONSTANTS[:upload][:local][:path] + new_name)
         url = CONSTANTS[:upload][:url]
