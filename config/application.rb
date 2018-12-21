@@ -10,6 +10,9 @@ module Canchas
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.2
+    #config.autoload_paths += %W(#{config.root}/lib)
+
+    config.autoload_paths += Dir["#{config.root}/lib"]
     #config.autoload_paths << Rails.root.join('app')
     #config.autoload_paths << "/app/services"
     # Settings in config/environments/* take precedence over those specified here.

@@ -32,7 +32,7 @@ gem 'jbuilder', '~> 2.5'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-
+require 'openssl'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
@@ -67,3 +67,4 @@ gem 'httparty'
 gem 'mongoid', '~> 7.0'
 gem 'mongo'
 gem 'rack-cors', '~> 0.3.1'
+gem 'openssl'

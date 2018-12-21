@@ -2,8 +2,10 @@ class Managment::ViewController < ApplicationController
   def index
     Access::UserService.new
     Access::LogService.new
-    #Lib::Cipher::encrypt
-    #Lib::Cipher::decrypt
+    puts '1 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
+    puts Assets::Cipher.encrypt(CONSTANTS[:key], 'hola mundo')
+    puts Assets::Cipher::decrypt(CONSTANTS[:key], 'CF7D69A989E1656C1060C3F3A358819C')
+    puts '2 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
     lang = get_language()
     menu = get_content('_menus')[lang]['managment']
     html_modules = ApplicationHelper::menu_modules(menu, 'managment/')
