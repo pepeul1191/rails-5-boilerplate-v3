@@ -1,0 +1,2 @@
+module Access::PermissionHelper
+end

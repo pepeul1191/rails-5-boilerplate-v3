@@ -17,7 +17,6 @@ Rails.application.routes.draw do
   get 'managment/department/list' => 'managment/department#list'
   post 'managment/department/save' => 'managment/department#save'
   # managment/field
-
   # managment/client
   get 'managment/client/list' => 'managment/client#list'
   post 'managment/client/save' => 'managment/client#save'
@@ -58,8 +57,13 @@ Rails.application.routes.draw do
   get 'managment/schedule/list/:field_id' => 'schedules/schedule#list_by_field_id'
   post 'managment/schedule/generate' => 'schedules/schedule#generate'
   post 'managment/schedule/delete' => 'schedules/schedule#delete'
+
   # access
   get 'access/' => 'access/view#index'
+  # permissions
+  get 'access/permission/list' => 'access/permission#list'
+  post 'access/permission/save' => 'access/permission#save'
+
   # errores
   get 'error/access/:id' => 'error#access'
   get '*unmatched_route' => 'application#not_found'

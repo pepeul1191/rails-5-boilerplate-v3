@@ -6,6 +6,8 @@ sp:
       subtitles:
         - name: Maestros
           items:
+            - name: Gestión de Sistemas
+              url: access/#/system
             - name: Gestión de Permisos
               url: access/#/permision
             - name: Gestión de Roles

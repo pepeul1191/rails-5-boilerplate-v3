@@ -29,9 +29,9 @@ Migraciones con DBMATE - managment:
 
 Migraciones con DBMATE - access:
 
-    $ dbmate -d "db/access/migrations" -e "CANCHAS" new <<nombre_de_migracion>>
-    $ dbmate -d "db/access/migrations" -e "CANCHAS" up
-    $ dbmate -d "db/access/migrations" -e "CANCHAS" rollback
+    $ dbmate -d "db/access/migrations" -e "ACCESS" new <<nombre_de_migracion>>
+    $ dbmate -d "db/access/migrations" -e "ACCESS" up
+    $ dbmate -d "db/access/migrations" -e "ACCESS" rollback
 
 ### Dump y Restore Mysql
 

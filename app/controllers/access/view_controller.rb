@@ -7,8 +7,8 @@ class Access::ViewController < ApplicationController
     @locals = {
       :title => get_titles()[lang]['managment_index'],
       :message => '',
-      :css => Managment::ViewHelper::index_css,
-      :js => Managment::ViewHelper::index_js,
+      :css => Access::ViewHelper::index_css,
+      :js => Access::ViewHelper::index_js,
       :html_modules => html_modules,
       :html_items => html_items,
     }
