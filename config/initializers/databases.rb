@@ -8,6 +8,12 @@ DB_MANAGMNET = Sequel.connect(
   :encoding=>'utf8',
 )
 
+DB_ACCESS = Sequel.connect(
+  'mysql2://root:123@localhost/access',
+  :max_connections=>5,
+  :encoding=>'utf8',
+)
+
 Mongoid.configure do |config|
   config.clients.default = {
     hosts: ['localhost:27017'],
