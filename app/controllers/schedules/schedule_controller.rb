@@ -18,9 +18,9 @@ class Schedules::ScheduleController < ApplicationController
           pipeline = Schedules::ScheduleHelper.pipeline_check_calendar_in_range(field_id, date_init, date_end)
           in_range = JSON.parse(Schedules::Schedule.collection.aggregate(pipeline).to_json)
           date_temp = DateTime.new(date_init.year, date_init.month, date_init.day)
-          if in_range == []
-            if transaction.length != 30 # create, else edit
-              transaction = random_string(30)
+          if in_range == []  # create, else edit
+            if transaction.length != 30
+              transaction = Assets::Randito.string_number(30)
               schedules = []
               while date_end >= date_temp do
                 s = Schedules::ScheduleHelper.create(date_temp, field_id, hour_init, hour_end, transaction)
