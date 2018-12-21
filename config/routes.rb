@@ -60,9 +60,12 @@ Rails.application.routes.draw do
 
   # access
   get 'access/' => 'access/view#index'
-  # permissions
+  # permission
   get 'access/permission/list' => 'access/permission#list'
   post 'access/permission/save' => 'access/permission#save'
+  # system
+  get 'access/system/list' => 'access/system#list'
+  post 'access/system/save' => 'access/system#save'
 
   # errores
   get 'error/access/:id' => 'error#access'

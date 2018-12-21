@@ -5,7 +5,8 @@ function limpiarURL(url_original, parametro){
 var accessRouter = Backbone.Router.extend({
   moduloView: null,
   permissionView: null,
-  rolView: null,
+  roleView: null,
+  systemView: null,
   usuarioView: null,
   usuarioLogView: null,
   usuarioDetalleView: null,
@@ -14,9 +15,10 @@ var accessRouter = Backbone.Router.extend({
   },
   routes: {
     "": "permissionIndex",
+    "system" : "systemIndex",
     "modulo" : "moduloIndex",
     "permission" : "permissionIndex",
-    "rol" : "rolIndex",
+    "role" : "roleIndex",
     "usuario/logs/:usuario_id" : "usuarioLog",
     "usuario/editar/:usuario_id" : "usuarioDetalle",
     "usuario/roles_permissions/:usuario_id" : "usuarioRolPermiso",
@@ -37,6 +39,14 @@ var accessRouter = Backbone.Router.extend({
     this.moduloView.render();
     this.moduloView.tablaModulo.listar();
   },
+  //system
+  systemIndex: function(){
+    if(this.systemView == null){
+      this.systemView = new SystemView();
+    }
+    this.systemView.render();
+    this.systemView.tableSystem.listar();
+  },
   //permission
   permissionIndex: function(){
     if(this.permissionView == null){
@@ -45,13 +55,13 @@ var accessRouter = Backbone.Router.extend({
     this.permissionView.render();
     this.permissionView.tablePermission.listar();
   },
-  //rol
-  rolIndex: function(){
-    if(this.rolView == null){
-      this.rolView = new RolView();
+  //role
+  roleIndex: function(){
+    if(this.roleView == null){
+      this.roleView = new RolView();
     }
-    this.rolView.render();
-    this.rolView.tablaRol.listar();
+    this.roleView.render();
+    this.roleView.tablaRole.listar();
   },
   //usuario
   usuarioIndex: function(){
