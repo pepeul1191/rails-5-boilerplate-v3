@@ -42,3 +42,5 @@ Fuentes:
 + https://docs.mongodb.com/mongoid/master/tutorials/mongoid-persistence/index.html
 + https://stackoverflow.com/questions/40921032/way-to-load-folder-as-module-constant-in-rails-app-directory
 + https://stackoverflow.com/questions/42493686/how-to-require-modules-in-rails
++ https://stackoverflow.com/questions/37156226/how-can-i-add-a-services-directory-to-the-load-path-in-rails
++ https://gist.github.com/wteuber/5318013
