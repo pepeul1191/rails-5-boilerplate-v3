@@ -3,7 +3,9 @@ class Access::PermissionController < ApplicationController
     rpta = nil
     status = 200
     begin
-      rpta = Access::Permission.all().to_a.to_json
+      rpta = Access::Permission.where(
+          :system_id => params[:system_id]
+        ).all().to_a.to_json
     rescue Exception => e
       rpta = {
         :tipo_mensaje => 'error',
@@ -24,6 +26,10 @@ class Access::PermissionController < ApplicationController
     nuevos = data['nuevos']
     editados = data['editados']
     eliminados = data['eliminados']
+    system_id = data['extra']['system_id']
+    puts '1 +++++++++++++++++++++++++++++++++++++++++++++++++'
+    puts system_id
+    puts '2 +++++++++++++++++++++++++++++++++++++++++++++++++'
     rpta = []
     array_nuevos = []
     error = false
@@ -35,6 +41,7 @@ class Access::PermissionController < ApplicationController
             n = Access::Permission.new(
               :name => nuevo['name'],
               :description => nuevo['description'],
+              :system_id => system_id,
             )
             n.save
             t = {
@@ -62,6 +69,7 @@ class Access::PermissionController < ApplicationController
           end
         end
       rescue Exception => e
+        puts e.backtrace
         Sequel::Rollback
         error = true
         execption = e

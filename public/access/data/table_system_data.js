@@ -21,31 +21,24 @@ var dataTableSystem = {
       edicion: true,
     },
     filaBotones: {
-      estilos: "width: 80px; padding-left: 7px;"
+      estilos: "width: 80px; padding-left: 15px;"
     },
   },
   tableKeys: ['id', 'name', ],
   filaBotones: [
     {
       tipo: "href",
-      claseOperacion: "gestionar-menu",
-      clase: "fa-chevron-right",
-      estilos: "padding-left: 10px;",
-      url: BASE_URL + 'accesos/#/sistema/menu/'/*+ sistema_id*/,
-    },
-    {
-      tipo: "href",
       claseOperacion: "gesionar-permisos",
       clase: "fa-list",
-      estilos: "padding-left: 10px;",
-      url: BASE_URL + 'accesos/#/sistema/permiso/'/*+ sistema_id*/,
+      estilos: "padding-left: 30px;",
+      url: BASE_URL + 'access/#/system/permission/'/*+ system_id*/,
     },
     {
       tipo: "href",
       claseOperacion: "gestionar-roles",
       clase: "fa-id-card-o",
       estilos: "padding-left: 10px;",
-      url: BASE_URL + 'accesos/#/sistema/rol/'/*+ sistema_id*/,
+      url: BASE_URL + 'access/#/system/role/'/*+ sistema_id*/,
     },
     {
       tipo: "i",

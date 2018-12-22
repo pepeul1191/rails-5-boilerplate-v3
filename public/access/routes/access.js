@@ -3,10 +3,13 @@ function limpiarURL(url_original, parametro){
 }
 
 var accessRouter = Backbone.Router.extend({
-  moduloView: null,
+  systemView: null,
+  systemPermissionView: null,
+  systemRoleView: null,
+
   permissionView: null,
   roleView: null,
-  systemView: null,
+
   initialize: function() {
   },
   routes: {
@@ -14,6 +17,8 @@ var accessRouter = Backbone.Router.extend({
     "system" : "systemIndex",
     "permission" : "permissionIndex",
     "role" : "roleIndex",
+    "system/permission/:system_id" : "systemPermission",
+    "system/role/:system_id" : "systemRole",
     "*actions" : "default",
   },
   index: function(){
@@ -29,6 +34,29 @@ var accessRouter = Backbone.Router.extend({
     }
     this.systemView.render();
     this.systemView.tableSystem.listar();
+  },
+  //modal permission
+  systemPermission: function(system_id){
+    if(this.systemPermissionView == null){
+      this.systemPermissionView = new SystemPermissionView(dataSystemPermissionView);
+    }
+    this.systemPermissionView.render();
+    this.systemPermissionView.tablePermission.urlListar =
+      limpiarURL(BASE_URL + "access/permission/list/" , system_id);
+    this.systemPermissionView.systemId = system_id;
+    this.systemPermissionView.tablePermission.listar(system_id);
+  },
+  //modal role
+  systemRole: function(system_id){
+    if(this.systemRoleView == null){
+      this.systemRoleView = new SystemRoleView(dataSystemRoleView);
+    }
+    this.systemRoleView.render();
+    this.systemRoleView.tableRol.urlListar =
+      limpiarURL(BASE_URL + "access/role/list/" , system_id);
+    this.systemRoleView.systemId = system_id;
+    this.systemRoleView.tableRole.listar(system_id);
+    this.systemRoleView.tableRolePermission.systemId = system_id;
   },
   //permission
   permissionIndex: function(){
