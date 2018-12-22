@@ -315,7 +315,15 @@ var UserView = Backbone.View.extend({
 					<br>
 					<br>
 					<button id="btnReenviarActivacion" disabled class="btn btn-default pull-left"><i class="fa fa-envelope" aria-hidden="true"></i>Reenviar Activación</button>
-					
+					<br>
+					<br>
+					<button id="btnVerLogs" disabled class="btn btn-default pull-left"><i class="fa fa-search" aria-hidden="true"></i>Ver Logs de Ingreso</button>
+					<br>
+					<br>
+					<button id="btnVerSistemas" disabled class="btn btn-default pull-left"><i class="fa fa-laptop" aria-hidden="true"></i>Ver Sistemas Asociados</button>
+					<br>
+					<br>
+					<button id="btnVerRolesPermisos" disabled class="btn btn-default pull-left"><i class="fa fa-list" aria-hidden="true"></i>Roles y Permisos</button>
 				</div>
 			</div>
 		`);
