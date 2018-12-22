@@ -36,12 +36,16 @@ module Access::ViewHelper
         CONSTANTS[:static_url] + 'bower_components/swp-backbone/views/autocomplete',
         CONSTANTS[:static_url] + 'access/models/permission',
         CONSTANTS[:static_url] + 'access/models/system',
+        CONSTANTS[:static_url] + 'access/models/role',
         CONSTANTS[:static_url] + 'access/collections/permission_collection',
+        CONSTANTS[:static_url] + 'access/collections/role_collection',
         CONSTANTS[:static_url] + 'access/collections/system_collection',
         CONSTANTS[:static_url] + 'access/data/table_permission_data',
+        CONSTANTS[:static_url] + 'access/data/table_role_data',
         CONSTANTS[:static_url] + 'access/data/table_system_data',
         CONSTANTS[:static_url] + 'access/views/permission_view',
         CONSTANTS[:static_url] + 'access/views/system_view',
+        CONSTANTS[:static_url] + 'access/views/role_view',
         CONSTANTS[:static_url] + 'access/routes/access',
       ]
     else
