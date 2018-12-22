@@ -26,7 +26,7 @@ var UserView = Backbone.View.extend({
 		"click #btnActualizarEstado": "actualizarEstado",
   },
   buscarUsuario: function(event){
-    var url = BASE_URL + "managment/user/search?user=" + $("#txtUsuario").val();
+    var url = BASE_URL + "access/user/search?user=" + $("#txtUsuario").val();
     var _this = this;
     $.ajax({
       type: "GET",
@@ -93,7 +93,7 @@ var UserView = Backbone.View.extend({
 		// update model
 		this.model.set("email", $("#txtCorreo").val());
 		// ajax
-		var url = BASE_URL + "managment/user/update_email";
+		var url = BASE_URL + "access/user/update_email";
 		var _this = this;
 		$.ajax({
 			type: "POST",
@@ -126,7 +126,7 @@ var UserView = Backbone.View.extend({
 		// update model
 		this.model.set("user_state_id", $("#cbmEstado").val());
 		// ajax
-		var url = BASE_URL + "managment/user/update_state";
+		var url = BASE_URL + "access/user/update_state";
 		var _this = this;
 		$.ajax({
 			type: "POST",
@@ -157,7 +157,7 @@ var UserView = Backbone.View.extend({
 	},
 	cambiarContrasenia: function(event){
 		// ajax
-		var url = BASE_URL + "managment/user/update_pass";
+		var url = BASE_URL + "access/user/update_pass";
 		var _this = this;
 		$.ajax({
 			type: "POST",
@@ -187,7 +187,7 @@ var UserView = Backbone.View.extend({
 	},
 	reenviarActivacion: function(event){
 		// ajax
-		var url = BASE_URL + "managment/user/resend_activation";
+		var url = BASE_URL + "access/user/resend_activation";
 		var _this = this;
 		$.ajax({
 			type: "POST",
@@ -217,7 +217,7 @@ var UserView = Backbone.View.extend({
 		});
 	},
 	crearUsuario: function(event){
-		var url = BASE_URL + "managment/user/create";
+		var url = BASE_URL + "access/user/create";
 		var _this = this;
 		$.ajax({
 			type: "POST",
@@ -251,7 +251,7 @@ var UserView = Backbone.View.extend({
 		});
 	},
 	generarCorrelativo: function(event){
-		var url = BASE_URL + "managment/user/correlation";
+		var url = BASE_URL + "access/user/correlation";
 		var _this = this;
 		$.ajax({
 			type: "GET",
@@ -315,6 +315,7 @@ var UserView = Backbone.View.extend({
 					<br>
 					<br>
 					<button id="btnReenviarActivacion" disabled class="btn btn-default pull-left"><i class="fa fa-envelope" aria-hidden="true"></i>Reenviar Activación</button>
+					
 				</div>
 			</div>
 		`);

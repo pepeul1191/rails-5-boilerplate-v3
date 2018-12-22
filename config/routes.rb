@@ -12,7 +12,6 @@ Rails.application.routes.draw do
   post 'file/upload' => 'file#upload'
   # managment
   get 'managment/' => 'managment/view#index'
-  get 'managment/user' => 'managment/view#user'
   # managment/department
   get 'managment/department/list' => 'managment/department#list'
   post 'managment/department/save' => 'managment/department#save'
@@ -60,6 +59,7 @@ Rails.application.routes.draw do
 
   # access
   get 'access/' => 'access/view#index'
+  get 'access/user' => 'access/view#user'
   # permission
   get 'access/permission/list/:system_id' => 'access/permission#list'
   post 'access/permission/save' => 'access/permission#save'

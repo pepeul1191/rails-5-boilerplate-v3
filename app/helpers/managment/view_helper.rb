@@ -87,45 +87,4 @@ module Managment::ViewHelper
     end
     rpta
   end
-
-  def self.user_css
-    rpta = nil
-    if CONSTANTS[:ambiente] == 'desarrollo'
-      rpta = [
-        CONSTANTS[:static_url] + 'bower_components/bootstrap/dist/css/bootstrap.min',
-        CONSTANTS[:static_url] + 'bower_components/font-awesome/css/font-awesome.min',
-        CONSTANTS[:static_url] + 'bower_components/swp-backbone/assets/css/constants',
-        CONSTANTS[:static_url] + 'bower_components/swp-backbone/assets/css/dashboard',
-        CONSTANTS[:static_url] + 'assets/css/constants-managment',
-        CONSTANTS[:static_url] + 'assets/css/styles-managment',
-      ]
-    else
-      rpta = [
-        CONSTANTS[:static_url] + 'dist/login.min',
-      ]
-    end
-    rpta
-  end
-
-  def self.user_js
-    rpta = nil
-    if CONSTANTS[:ambiente] == 'desarrollo'
-      rpta = [
-        CONSTANTS[:static_url] + 'bower_components/jquery/dist/jquery.min',
-        CONSTANTS[:static_url] + 'bower_components/bootstrap/dist/js/bootstrap.min',
-        CONSTANTS[:static_url] + 'bower_components/underscore/underscore-min',
-        CONSTANTS[:static_url] + 'bower_components/backbone/backbone-min',
-        CONSTANTS[:static_url] + 'bower_components/handlebars/handlebars.min',
-        CONSTANTS[:static_url] + 'bower_components/swp-backbone/layouts/application',
-        CONSTANTS[:static_url] + 'managment/models/user',
-        CONSTANTS[:static_url] + 'managment/views/user_view',
-        CONSTANTS[:static_url] + 'managment/routes/user',
-      ]
-    else
-      rpta = [
-        CONSTANTS[:static_url] + 'dist/login.min',
-      ]
-    end
-    rpta
-  end
 end

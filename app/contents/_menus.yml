@@ -11,7 +11,9 @@ sp:
         - name: Gestión de Usuarios
           items:
             - name: Gestión de Usuarios
-              url: access/#/user
+              url: access/user/#/
+            - name: Agregar Usuario
+              url: access/user/#/add
     - name: Administración
       url: managment/
       icon: ''
@@ -34,9 +36,3 @@ sp:
               url: managment/#/client
             - name: Agregar Cliente
               url: managment/#/client/add
-        - name: Usuarios
-          items:
-            - name: Gestión de Usuarios
-              url: managment/user/#/
-            - name: Agregar Usuario
-              url: managment/user/#/add

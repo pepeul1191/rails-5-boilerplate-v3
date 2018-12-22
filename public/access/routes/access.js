@@ -13,10 +13,8 @@ var accessRouter = Backbone.Router.extend({
   initialize: function() {
   },
   routes: {
-    "": "permissionIndex",
+    "": "systemIndex",
     "system" : "systemIndex",
-    "permission" : "permissionIndex",
-    "role" : "roleIndex",
     "system/permission/:system_id" : "systemPermission",
     "system/role/:system_id" : "systemRole",
     "*actions" : "default",
