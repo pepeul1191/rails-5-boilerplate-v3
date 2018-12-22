@@ -43,6 +43,7 @@ module Access::ViewHelper
         CONSTANTS[:static_url] + 'access/data/table_system_data',
         CONSTANTS[:static_url] + 'access/data/table_permission_data',
         CONSTANTS[:static_url] + 'access/data/table_role_data',
+        CONSTANTS[:static_url] + 'access/data/table_role_permission_data',
         CONSTANTS[:static_url] + 'access/data/modal_system_permission_data',
         CONSTANTS[:static_url] + 'access/data/modal_system_role_data',
         CONSTANTS[:static_url] + 'access/views/system_view',

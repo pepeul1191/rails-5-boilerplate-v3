@@ -28,9 +28,15 @@ var dataTableRole = {
   filaBotones: [
     {
       tipo: "i",
+      claseOperacion: "ver-permisos",
+      clase: "fa-chevron-right",
+      estilos: "padding-left: 23px;",
+    },
+    {
+      tipo: "i",
       claseOperacion: "quitar-fila",
       clase: "fa-times",
-      estilos: "padding-left: 25px;",
+      estilos: "padding-left: 5px;",
     },
   ],
   collection: new RolesCollection(),

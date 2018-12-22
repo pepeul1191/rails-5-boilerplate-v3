@@ -66,6 +66,9 @@ Rails.application.routes.draw do
   # role
   get 'access/role/list/:system_id' => 'access/role#list'
   post 'access/role/save' => 'access/role#save'
+  # role/permission
+  get 'access/role/permission/list/:system_id/:role_id' => 'access/role#permission_list'
+  post 'access/role/permission/save' => 'access/role#permission_save'
   # system
   get 'access/system/list' => 'access/system#list'
   post 'access/system/save' => 'access/system#save'

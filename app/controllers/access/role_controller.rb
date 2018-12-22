@@ -88,4 +88,84 @@ class Access::RoleController < ApplicationController
     end
     render :plain => rpta, :status => status
   end
+
+  def permission_list
+    rpta = nil
+    status = 200
+    begin
+      system_id = params['system_id']
+      role_id = params['role_id']
+      rpta = DB_ACCESS.fetch('
+        SELECT T.id AS id, T.name AS name, (CASE WHEN (P.existe = 1) THEN 1 ELSE 0 END) AS existe, T.description AS description FROM
+        (
+          SELECT id, name, description, 0 AS existe FROM permissions WHERE system_id = ' + system_id + '
+        ) T
+        LEFT JOIN
+        (
+          SELECT P.id, P.name,  P.description, 1 AS existe  FROM permissions P
+          INNER JOIN roles_permissions RP ON P.id = RP.permission_id
+          WHERE RP.role_id =  ' + role_id + '
+        ) P
+        ON T.id = P.id').to_a.to_json
+    rescue Exception => e
+      status = 500
+      rpta = {
+        :tipo_mensaje => 'error',
+        :mensaje => [
+          'Se ha producido un error en listar los permisos del rol',
+          e.message
+        ]}.to_json
+    end
+    render :plain => rpta, :status => status
+  end
+
+  def permission_save
+    data = JSON.parse(params[:data])
+    editados = data['editados']
+    role_id = data['extra']['role_id']
+    rpta = []
+    status = 200
+    DB_ACCESS.transaction do
+      begin
+        if editados.length != 0
+          editados.each do |editado|
+            existe = editado['existe']
+            permission_id = editado['id']
+            e = Access::RolePermission.where(
+              :permission_id => permission_id,
+              :role_id => role_id
+            ).first
+            if existe == 0 #borrar si existe
+              if e != nil
+                e.delete
+              end
+            elsif existe == 1 #crear si no existe
+              if e == nil
+                n = Access::RolePermission.new(
+                  :permission_id => permission_id,
+                  :role_id => role_id
+                )
+                n.save
+              end
+            end
+          end
+        end
+        rpta = {
+          :tipo_mensaje => 'success',
+          :mensaje => [
+            'Se ha registrado la asociación de permisos al rol',
+          ]}.to_json
+      rescue Exception => e
+        Sequel::Rollback
+        status = 500
+        rpta = {
+          :tipo_mensaje => 'error',
+          :mensaje => [
+            'Se ha producido un error en asociar los permisos al rol',
+            e.message
+          ]}.to_json
+      end
+    end
+    render :plain => rpta, :status => status
+  end
 end

@@ -7,7 +7,7 @@ var SystemRoleView = ModalView.extend({
     // delegación de eventos
     this.delegateEvents();
     this.tableRole = new TableView(dataTableRole);
-    //this.tableRolePermission = new TableView(dataTablaRolePermission);
+    this.tableRolePermission = new TableView(dataTableRolePermission);
   },
   events: {
     // se está usando asignacion dinamica de eventos en el constructor
@@ -19,7 +19,7 @@ var SystemRoleView = ModalView.extend({
     "click #tableRole > tbody > tr > td > i.ver-permisos": "verPermissions",
     // table permisos
     "change #tableRolePermission > tbody > tr > td > .input-check": "clickCheckBoxRolePermission",
-    "click #tableRolePermission > tfoot > tr > td > button.guardar-table": "guardarTablaRolePermission",
+    "click #tableRolePermission > tfoot > tr > td > button.guardar-tabla": "guardarTablaRolePermission",
   },
   //eventos table de roles
   inputTextEscribirRole: function(event){
@@ -38,7 +38,7 @@ var SystemRoleView = ModalView.extend({
   verPermissions: function(event){
     var roleId = event.target.parentElement.parentElement.firstChild.innerHTML;
     this.tableRolePermission.urlListar =
-      limpiarURL(BASE_URL + "access/role/permission/list/" , this.tableRolePermission.sistemaId + "/" + roleId);
+      limpiarURL(BASE_URL + "access/role/permission/list/" , this.tableRolePermission.systemId + "/" + roleId);
     this.tableRolePermission.roleId = roleId;
     this.tableRolePermission.limpiarBody();
     this.tableRolePermission.listar();
@@ -50,7 +50,7 @@ var SystemRoleView = ModalView.extend({
   },
   guardarTablaRolePermission: function(evnet){
     this.tableRolePermission.extraData = {
-      system_id: this.sistemaId,
+      system_id: this.systemId,
       role_id: this.tableRolePermission.roleId,
     };
     this.tableRolePermission.guardarTabla(event);
