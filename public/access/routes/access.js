@@ -52,11 +52,11 @@ var accessRouter = Backbone.Router.extend({
       this.systemRoleView = new SystemRoleView(dataSystemRoleView);
     }
     this.systemRoleView.render();
-    this.systemRoleView.tableRol.urlListar =
+    this.systemRoleView.tableRole.urlListar =
       limpiarURL(BASE_URL + "access/role/list/" , system_id);
     this.systemRoleView.systemId = system_id;
     this.systemRoleView.tableRole.listar(system_id);
-    this.systemRoleView.tableRolePermission.systemId = system_id;
+    //this.systemRoleView.tableRolePermission.systemId = system_id;
   },
   //permission
   permissionIndex: function(){

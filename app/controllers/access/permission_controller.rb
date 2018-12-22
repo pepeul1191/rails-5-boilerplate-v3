@@ -27,9 +27,6 @@ class Access::PermissionController < ApplicationController
     editados = data['editados']
     eliminados = data['eliminados']
     system_id = data['extra']['system_id']
-    puts '1 +++++++++++++++++++++++++++++++++++++++++++++++++'
-    puts system_id
-    puts '2 +++++++++++++++++++++++++++++++++++++++++++++++++'
     rpta = []
     array_nuevos = []
     error = false

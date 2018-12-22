@@ -3,7 +3,9 @@ class Access::RoleController < ApplicationController
     rpta = nil
     status = 200
     begin
-      rpta = Access::Role.all().to_a.to_json
+      rpta = Access::Role.where(
+          :system_id => params[:system_id]
+        ).all().to_a.to_json
     rescue Exception => e
       rpta = {
         :tipo_mensaje => 'error',
@@ -24,6 +26,7 @@ class Access::RoleController < ApplicationController
     nuevos = data['nuevos']
     editados = data['editados']
     eliminados = data['eliminados']
+    system_id = data['extra']['system_id']
     rpta = []
     array_nuevos = []
     error = false
@@ -34,6 +37,7 @@ class Access::RoleController < ApplicationController
           nuevos.each do |nuevo|
             n = Access::Role.new(
               :name => nuevo['name'],
+              :system_id => system_id,
             )
             n.save
             t = {
