@@ -251,7 +251,7 @@ var UserView = Backbone.View.extend({
 		});
 	},
 	generarCorrelativo: function(event){
-		var url = BASE_URL + "access/user/correlation";
+		var url = BASE_URL + "managment/correlation/create";
 		var _this = this;
 		$.ajax({
 			type: "GET",
@@ -337,7 +337,7 @@ var UserView = Backbone.View.extend({
 			<div class="col-md-3">
 		    <div class="form-group">
 		      <label for="txtUsuarioNuevo">Usuario</label>
-		      <input type="text" class="form-control" id="txtUsuarioNuevo" placeholder="" disabled value="">
+		      <input type="text" class="form-control" id="txtUsuarioNuevo" placeholder="" value="">
 					<br>
 					<button id="btnGenerarUsuario" class="btn btn-default pull-right"><i class="fa fa-search" aria-hidden="true"></i>Generar Nombre</button>
 		    </div>

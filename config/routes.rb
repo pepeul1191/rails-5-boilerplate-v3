@@ -56,6 +56,8 @@ Rails.application.routes.draw do
   get 'managment/schedule/list/:field_id' => 'schedules/schedule#list_by_field_id'
   post 'managment/schedule/generate' => 'schedules/schedule#generate'
   post 'managment/schedule/delete' => 'schedules/schedule#delete'
+  # managment/correlation
+  get 'managment/correlation/create' => 'managment/correlation#client_create'
 
   # access
   get 'access/' => 'access/view#index'
