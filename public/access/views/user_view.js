@@ -273,6 +273,31 @@ var UserView = Backbone.View.extend({
 			}
 		});
 	},
+	systems: function(){
+		var rpta = [];
+		var url = BASE_URL + "access/system/list";
+		var _this = this;
+		$.ajax({
+			type: "GET",
+			url: url,
+			data: { },
+			headers: {
+				[CSRF_KEY]: CSRF,
+			},
+			async: false,
+			success: function(data){
+				rpta = JSON.parse(data);
+			},
+			error: function(error){
+				console.log(error);
+				_this.message.removeClass("color-success");
+				_this.message.removeClass("color-warning");
+				_this.message.addClass("color-error");
+				_this.message.html("Ocurrió un error en obtener los sistemas");
+			}
+		});
+		return rpta;
+	},
   showIndex: function(event){
 		var template = _.template(`
 			<div class="col-md-12">
@@ -350,7 +375,22 @@ var UserView = Backbone.View.extend({
 					<button id="btnCrearUsuario" class="btn btn-default pull-right"><i class="fa fa-check" aria-hidden="true"></i>Crear Usuario</button>
 				</div>
 			</div>
+			<div class="col-md-6">
+				<div class="form-group">
+					<label for="txtCorreoNuevo">Sistemas</label>
+					<% for (var i = 0; i < systems.length; i++){ %>
+					<div class="form-check">
+				    <input type="checkbox" class="form-check-input" id="exampleCheck<%= systems[i]['id'] %>">
+				    <label class="form-check-label" for="exampleCheck<%= systems[i]['id'] %>">
+							<%= systems[i]['name'] %>
+						</label>
+				  </div>
+					<% } %>
+					<br>
+					<button id="btnAsociarSistemasUsuario" class="btn btn-default"><i class="fa fa-check" aria-hidden="true"></i>Asociar Sistemas</button>
+				</div>
+			</div>
 		`);
-		$(this.el).html(template());
+		$(this.el).html(template({systems: this.systems()}));
   },
 });
