@@ -223,18 +223,21 @@ var UserView = Backbone.View.extend({
 			type: "POST",
 			url: url,
 			data: {
-			  usuario: $("#txtUsuarioNuevo").val(),
-				correo: $("#txtCorreoNuevo").val(),
+			  user: $("#txtUsuarioNuevo").val(),
+				email: $("#txtCorreoNuevo").val(),
  			},
 			headers: {
 				[CSRF_KEY]: CSRF,
 			},
 			async: false,
 			success: function(data){
+				data = JSON.parse(data);
 				_this.message.html("Usuario creado");
 				_this.message.addClass("color-success");
 				_this.message.removeClass("color-warning");
 				_this.message.removeClass("color-error");
+				_this.model.set("user_id", data.mensaje[1]);
+				console.log(_this.model);
 			},
 			error: function(xhr, status, error){
 				console.error(xhr.responseText);
@@ -242,7 +245,7 @@ var UserView = Backbone.View.extend({
 				if(m.mensaje[1] == "repeated"){
 					_this.message.html("Usuario y/o correo ya se encuentran en uso");
 				}else{
-					_this.message.html(m.mensaje[0]);
+					_this.message.html(m.mensaje[0] + ". " + m.mensaje[1]);
 				}
 				_this.message.removeClass("color-success");
 				_this.message.removeClass("color-warning");

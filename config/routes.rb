@@ -74,6 +74,8 @@ Rails.application.routes.draw do
   # system
   get 'access/system/list' => 'access/system#list'
   post 'access/system/save' => 'access/system#save'
+  # user
+  post 'access/user/create' => 'access/user#create_from_managment'
 
   # errores
   get 'error/access/:id' => 'error#access'
