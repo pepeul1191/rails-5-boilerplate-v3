@@ -51,12 +51,23 @@ var UserView = Backbone.View.extend({
 					_this.llenarFormulario(JSON.parse(data));
 				}
       },
-      error: function(error){
+      error: function(xhr, status, error){
         console.error(error);
+				var m = JSON.parse(xhr.responseText);
+				console.log(m);
         _this.message.removeClass("color-success");
 				_this.message.removeClass("color-warning");
 				_this.message.addClass("color-error");
-				_this.message.html("Ocurrió un error en realizar la búsqueda");
+				_this.message.html("Ocurrió un error en realizar la búsqueda. " + m.mensaje[1]);
+				$("#cbmEstado").prop("disabled", true);
+				$("#txtCorreo").prop("disabled", true);
+				$("#btnActualizarCorreo").prop("disabled", true);
+				$("#btnCambiarContrasenia").prop("disabled", true);
+				$("#btnReenviarActivacion").prop("disabled", true);
+				$("#btnActualizarEstado").prop("disabled", true);
+				$("#btnVerLogs").prop("disabled", true);
+				$("#btnVerSistemas").prop("disabled", true);
+				$("#btnVerRolesPermisos").prop("disabled", true);
       }
     });
 	},
@@ -68,13 +79,16 @@ var UserView = Backbone.View.extend({
 		$("#btnCambiarContrasenia").prop("disabled", false);
 		$("#btnReenviarActivacion").prop("disabled", false);
 		$("#btnActualizarEstado").prop("disabled", false);
+		$("#btnVerLogs").prop("disabled", false);
+		$("#btnVerSistemas").prop("disabled", false);
+		$("#btnVerRolesPermisos").prop("disabled", false);
 		// llenar form
 		$("#txtCorreo").val(data.email);
-		$("#cbmEstado").val(data.state_id);
+		$("#cbmEstado").val(data.user_state_id);
 		// llenar models
 		this.model.set("user_id", data.id);
 		this.model.set("email", data.email);
-		this.model.set("user_state_id", data.email);
+		this.model.set("user_state_id", data.user_state_id);
 	},
 	bloquearFormulario: function(){
 		// disabled = true
@@ -84,6 +98,9 @@ var UserView = Backbone.View.extend({
 		$("#btnCambiarContrasenia").prop("disabled", true);
 		$("#btnReenviarActivacion").prop("disabled", true);
 		$("#btnActualizarEstado").prop("disabled", true);
+		$("#btnVerLogs").prop("disabled", true);
+		$("#btnVerSistemas").prop("disabled", true);
+		$("#btnVerRolesPermisos").prop("disabled", true);
 		// llenar form
 		$("#txtCorreo").val("");
 		$("#cbmEstado").val("E");

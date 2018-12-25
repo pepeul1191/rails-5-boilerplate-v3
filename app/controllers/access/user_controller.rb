@@ -111,4 +111,28 @@ class Access::UserController < ApplicationController
     end
     render :plain => rpta, :status => status
   end
+
+  def search
+    rpta = nil
+    status = 200
+    user_name = params[:user]
+    begin
+      e = Access::User.select(:id, :email, :user_state_id).where(
+        :user => user_name,
+      ).first
+      if e == nil
+        raise Exception, 'Usuario no registrado.'
+      end
+      rpta = e.to_json
+    rescue Exception => e
+      status = 500
+      rpta = {
+        :tipo_mensaje => 'error',
+        :mensaje => [
+          'Se ha producido un error en obtener al usuario',
+          e.message]
+        }.to_json
+    end
+    render :plain => rpta, :status => status
+  end
 end
