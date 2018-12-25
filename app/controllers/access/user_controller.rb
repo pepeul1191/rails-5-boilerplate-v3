@@ -58,4 +58,57 @@ class Access::UserController < ApplicationController
     end
     render :plain => rpta, :status => status
   end
+
+  def system_save
+    rpta = nil
+    status = 200
+    data = JSON.parse(params[:data])
+    user_id = data['user_id']
+    systems = data['systems']
+    rpta = []
+    array_nuevos = []
+    error = false
+    execption = nil
+    DB_ACCESS.transaction do
+      begin
+        systems.each do |sys|
+          e = Access::UserSystem.where(
+            :user_id => user_id,
+            :system_id => sys['system_id'],
+          ).first
+          if sys['exist'] == false #borrar si existe
+            Access::UserSystem.where(
+              :user_id => user_id,
+              :system_id => sys['system_id'],
+            ).delete
+          end
+          if sys['exist'] == true
+            if e == nil
+              Access::UserSystem.new(
+                :user_id => user_id,
+                :system_id => sys['system_id'],
+              ).save
+            end
+          end
+        end
+        rpta = {
+          :tipo_mensaje => 'success',
+          :mensaje => [
+            'Se ha asociado los sistemas al usuario',
+            ]
+          }.to_json
+      rescue Exception => e
+        Sequel::Rollback
+        error = true
+        status = 500
+        rpta = {
+          :tipo_mensaje => 'error',
+          :mensaje => [
+            'Se ha producido un error en asociar los sistemas al usuario',
+            e.message]
+          }.to_json
+      end
+    end
+    render :plain => rpta, :status => status
+  end
 end

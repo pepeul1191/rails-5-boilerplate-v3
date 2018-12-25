@@ -24,6 +24,7 @@ var UserView = Backbone.View.extend({
 		"click #btnCambiarContrasenia": "cambiarContrasenia",
 		"click #btnReenviarActivacion": "reenviarActivacion",
 		"click #btnActualizarEstado": "actualizarEstado",
+		"click #btnAsociarSistemasUsuarioNuevo": "asociarSistemasUsuarioNuevo",
   },
   buscarUsuario: function(event){
     var url = BASE_URL + "access/user/search?user=" + $("#txtUsuario").val();
@@ -301,6 +302,53 @@ var UserView = Backbone.View.extend({
 		});
 		return rpta;
 	},
+	asociarSistemasUsuarioNuevo: function(){
+		if( this.model.get("user_id") != null){
+			var systems = [];
+			$.each($("input[name='systemCheckbox']"), function(){
+	      //systems.push($(this).val());
+				systems.push({
+					system_id:$(this).attr("system_id"),
+	 				exist: $(this).is(":checked"),
+				});
+	    });
+			var data = {
+				user_id: this.model.get("user_id"),
+				systems: systems,
+			};
+			var url = BASE_URL + "access/user/system_save";
+			var _this = this;
+			$.ajax({
+				type: "POST",
+				url: url,
+				data: "data="+JSON.stringify(data),
+				headers: {
+					[CSRF_KEY]: CSRF,
+				},
+				async: false,
+				success: function(data){
+					data = JSON.parse(data);
+					_this.message.html("Sistema(s) asociados al usuario");
+					_this.message.addClass("color-success");
+					_this.message.removeClass("color-warning");
+					_this.message.removeClass("color-error");
+				},
+				error: function(xhr, status, error){
+					console.error(xhr.responseText);
+					var m = JSON.parse(xhr.responseText);
+					_this.message.html(m.mensaje[0] + ". " + m.mensaje[1]);
+					_this.message.removeClass("color-success");
+					_this.message.removeClass("color-warning");
+					_this.message.addClass("color-error");
+				}
+			});
+		}else{
+			this.message.removeClass("color-success");
+			this.message.removeClass("color-warning");
+			this.message.addClass("color-error");
+			this.message.html("Debe crear primero al usuario");
+		}
+	},
   showIndex: function(event){
 		var template = _.template(`
 			<div class="col-md-12">
@@ -383,14 +431,14 @@ var UserView = Backbone.View.extend({
 					<label for="txtCorreoNuevo">Sistemas</label>
 					<% for (var i = 0; i < systems.length; i++){ %>
 					<div class="form-check">
-				    <input type="checkbox" class="form-check-input" id="exampleCheck<%= systems[i]['id'] %>">
-				    <label class="form-check-label" for="exampleCheck<%= systems[i]['id'] %>">
+				    <input type="checkbox" class="form-check-input" name="systemCheckbox" id="system_<%= systems[i]['id'] %>" system_id="<%= systems[i]['id'] %>">
+				    <label class="form-check-label" for="system_<%= systems[i]['id'] %>">
 							<%= systems[i]['name'] %>
 						</label>
 				  </div>
 					<% } %>
 					<br>
-					<button id="btnAsociarSistemasUsuario" class="btn btn-default"><i class="fa fa-check" aria-hidden="true"></i>Asociar Sistemas</button>
+					<button id="btnAsociarSistemasUsuarioNuevo" class="btn btn-default"><i class="fa fa-check" aria-hidden="true"></i>Asociar Sistemas</button>
 				</div>
 			</div>
 		`);

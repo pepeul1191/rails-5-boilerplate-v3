@@ -59,9 +59,11 @@ Rails.application.routes.draw do
   # managment/correlation
   get 'managment/correlation/create' => 'managment/correlation#client_create'
 
+
   # access
   get 'access/' => 'access/view#index'
   get 'access/user' => 'access/view#user'
+  post 'access/user/system_save' => 'access/user#system_save'
   # permission
   get 'access/permission/list/:system_id' => 'access/permission#list'
   post 'access/permission/save' => 'access/permission#save'
