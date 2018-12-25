@@ -219,7 +219,8 @@ var UserView = Backbone.View.extend({
 			},
 			async: false,
 			success: function(data){
-				_this.message.html(data);
+				var m = JSON.parse(data);
+				_this.message.html(m.mensaje[0]);
 				_this.message.addClass("color-success");
 				_this.message.removeClass("color-warning");
 				_this.message.removeClass("color-error");

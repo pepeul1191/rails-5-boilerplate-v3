@@ -218,8 +218,6 @@ class Access::UserController < ApplicationController
     email = params[:email]
     status = 200
     begin
-      temp_password = Assets::Randito.string_number(20)
-      password = Assets::Cipher.encrypt(temp_password, CONSTANTS[:key])
       #create user if not exist
       user = Access::User.where(
         :email => email,
@@ -246,7 +244,7 @@ class Access::UserController < ApplicationController
         rpta = {
           :tipo_mensaje => 'success',
           :mensaje => [
-            'Se ha enviado el correo de activación',
+            'Se ha enviado el correo de cambio de contraseña',
           ]
         }.to_json
       else
@@ -258,6 +256,46 @@ class Access::UserController < ApplicationController
         :tipo_mensaje => 'error',
         :mensaje => [
           'Se ha producido un error en mandar el correo de cambio de contraseña',
+          e.message]
+        }.to_json
+    end
+    render :plain => rpta, :status => status
+  end
+
+  def resend_activation
+    email = params[:email]
+    user_id = params[:user_id]
+    user = params[:user]
+    status = 200
+    begin
+      # get activation code
+      e = Access::UserKey.where(
+        :user_id => user_id
+      ).first
+      # mandar correo de activación
+      mail = Mail::NotificationService.new
+      data = {
+        :name => user,
+        :user_id => user_id,
+        :activation_key => e.activation,
+        :lang => 'sp',
+        :to => email,
+        :base_url => SERVICES[:mobile_back][:url]
+      }
+      mail.resend_activation(data)
+      # mensaje de respuesta
+      rpta = {
+        :tipo_mensaje => 'success',
+        :mensaje => [
+          'Se ha enviado el correo de activación de cuenta',
+        ]
+      }.to_json
+    rescue Exception => e
+      status = 500
+      rpta = {
+        :tipo_mensaje => 'error',
+        :mensaje => [
+          'Se ha producido un error en mandar el correo de activación de cuenta',
           e.message]
         }.to_json
     end

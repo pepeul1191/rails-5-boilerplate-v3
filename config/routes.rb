@@ -68,6 +68,7 @@ Rails.application.routes.draw do
   get 'access/user/search' => 'access/user#search'
   post 'access/user/create' => 'access/user#create_from_managment'
   post 'access/user/update_pass' => 'access/user#update_pass'
+  post 'access/user/resend_activation' => 'access/user#resend_activation'
   # permission
   get 'access/permission/list/:system_id' => 'access/permission#list'
   post 'access/permission/save' => 'access/permission#save'
