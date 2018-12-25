@@ -66,6 +66,8 @@ Rails.application.routes.draw do
   post 'access/user/update_state' => 'access/user#update_state'
   post 'access/user/update_email' => 'access/user#update_email'
   get 'access/user/search' => 'access/user#search'
+  post 'access/user/create' => 'access/user#create_from_managment'
+  post 'access/user/update_pass' => 'access/user#update_pass'
   # permission
   get 'access/permission/list/:system_id' => 'access/permission#list'
   post 'access/permission/save' => 'access/permission#save'
@@ -78,8 +80,6 @@ Rails.application.routes.draw do
   # system
   get 'access/system/list' => 'access/system#list'
   post 'access/system/save' => 'access/system#save'
-  # user
-  post 'access/user/create' => 'access/user#create_from_managment'
 
   # errores
   get 'error/access/:id' => 'error#access'

@@ -24,7 +24,7 @@ class Access::UserController < ApplicationController
         Access::UserKey.new(
           :user_id => n.id,
           :activation => activation_key,
-        )
+        ).save
         # mandar correo de activación
         mail = Mail::NotificationService.new
         data = {
@@ -208,6 +208,56 @@ class Access::UserController < ApplicationController
         :tipo_mensaje => 'error',
         :mensaje => [
           'Se ha producido un error en actualizar el correo del usuario',
+          e.message]
+        }.to_json
+    end
+    render :plain => rpta, :status => status
+  end
+
+  def update_pass
+    email = params[:email]
+    status = 200
+    begin
+      temp_password = Assets::Randito.string_number(20)
+      password = Assets::Cipher.encrypt(temp_password, CONSTANTS[:key])
+      #create user if not exist
+      user = Access::User.where(
+        :email => email,
+      ).first
+      if user != nil
+        # update user reset key
+        reset_key = Assets::Randito.string_number(25)
+        e = Access::UserKey.where(
+          :user_id => user.id
+        ).first
+        e.reset = reset_key
+        e.save
+        # mandar correo de activación
+        mail = Mail::NotificationService.new
+        data = {
+          :user_id => user.id,
+          :reset_key => reset_key,
+          :lang => 'sp',
+          :to => email,
+          :base_url => SERVICES[:mobile_back][:url]
+        }
+        mail.reset_password(data)
+        # mensaje de respuesta
+        rpta = {
+          :tipo_mensaje => 'success',
+          :mensaje => [
+            'Se ha enviado el correo de activación',
+          ]
+        }.to_json
+      else
+        raise Exception, 'Usuario no registrado.'
+      end
+    rescue Exception => e
+      status = 500
+      rpta = {
+        :tipo_mensaje => 'error',
+        :mensaje => [
+          'Se ha producido un error en mandar el correo de cambio de contraseña',
           e.message]
         }.to_json
     end
