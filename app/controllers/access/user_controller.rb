@@ -135,4 +135,37 @@ class Access::UserController < ApplicationController
     end
     render :plain => rpta, :status => status
   end
+
+  def update_state
+    rpta = nil
+    status = 200
+    user_id = params[:user_id]
+    user_state_id = params[:user_state_id]
+    begin
+      e = Access::User.where(
+        :id => user_id,
+      ).first
+      if e == nil
+        raise Exception, 'Usuario no registrado.'
+      else
+        e.user_state_id = user_state_id
+        e.save
+      end
+      rpta = {
+        :tipo_mensaje => 'success',
+        :mensaje => [
+          'Se ha actualizado el estado del usuario',
+          ]
+        }.to_json
+    rescue Exception => e
+      status = 500
+      rpta = {
+        :tipo_mensaje => 'error',
+        :mensaje => [
+          'Se ha producido un error en obtener al usuario',
+          e.message]
+        }.to_json
+    end
+    render :plain => rpta, :status => status
+  end
 end
