@@ -162,7 +162,52 @@ class Access::UserController < ApplicationController
       rpta = {
         :tipo_mensaje => 'error',
         :mensaje => [
-          'Se ha producido un error en obtener al usuario',
+          'Se ha producido un error en actualizar el estado del usuario',
+          e.message]
+        }.to_json
+    end
+    render :plain => rpta, :status => status
+  end
+
+  def update_email
+    rpta = nil
+    status = 200
+    user_id = params[:user_id]
+    email = params[:email]
+    begin
+      e = Access::User.where(
+        :id => user_id,
+      ).first
+      if e == nil
+        raise Exception, 'Usuario no registrado.'
+      else
+        m = Access::User.where(
+          :email => email
+        ).first
+        if m == nil
+          e.email = email
+          e.save
+        else
+          if m.id.to_s == user_id.to_s
+            e.email = email
+            e.save
+          else
+            raise Exception, 'Correo ya registrado'
+          end
+        end
+      end
+      rpta = {
+        :tipo_mensaje => 'success',
+        :mensaje => [
+          'Se ha actualizado el correo del usuario',
+          ]
+        }.to_json
+    rescue Exception => e
+      status = 500
+      rpta = {
+        :tipo_mensaje => 'error',
+        :mensaje => [
+          'Se ha producido un error en actualizar el correo del usuario',
           e.message]
         }.to_json
     end

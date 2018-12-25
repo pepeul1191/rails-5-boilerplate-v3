@@ -64,6 +64,7 @@ Rails.application.routes.draw do
   get 'access/user' => 'access/view#user'
   post 'access/user/system_save' => 'access/user#system_save'
   post 'access/user/update_state' => 'access/user#update_state'
+  post 'access/user/update_email' => 'access/user#update_email'
   get 'access/user/search' => 'access/user#search'
   # permission
   get 'access/permission/list/:system_id' => 'access/permission#list'
