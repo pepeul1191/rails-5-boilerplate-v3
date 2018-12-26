@@ -87,8 +87,11 @@ module Access::ViewHelper
         CONSTANTS[:static_url] + 'bower_components/underscore/underscore-min',
         CONSTANTS[:static_url] + 'bower_components/backbone/backbone-min',
         CONSTANTS[:static_url] + 'bower_components/handlebars/handlebars.min',
-        CONSTANTS[:static_url] + 'bower_components/swp-backbone/layouts/application',
+        CONSTANTS[:static_url] + 'bower_components/swp-backbone/views/table',
         CONSTANTS[:static_url] + 'access/models/user',
+        CONSTANTS[:static_url] + 'access/models/user_log',
+        CONSTANTS[:static_url] + 'access/collections/user_log_collection',
+        CONSTANTS[:static_url] + 'access/data/table_user_log_data',
         CONSTANTS[:static_url] + 'access/views/user_view',
         CONSTANTS[:static_url] + 'access/routes/user',
       ]

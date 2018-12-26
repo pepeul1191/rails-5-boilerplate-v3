@@ -1,0 +1,2 @@
+module Access::UserLogHelper
+end

@@ -15,6 +15,9 @@ var UserView = Backbone.View.extend({
 			{id: 6, name: "Activación Pendiente"},
 			{id: 7, name: "Comṕleto"},
 		];
+		this.modalButton = $("#btnModal");
+		this.modalContainer = $("#modal-container");
+		this.tableUserLog = new TableView(dataTableUserLog);
 	},
 	events: {
     "click #btnBuscarUsuario": "buscarUsuario",
@@ -25,6 +28,9 @@ var UserView = Backbone.View.extend({
 		"click #btnReenviarActivacion": "reenviarActivacion",
 		"click #btnActualizarEstado": "actualizarEstado",
 		"click #btnAsociarSistemasUsuarioNuevo": "asociarSistemasUsuarioNuevo",
+		"click #btnVerLogs": "verLogs",
+		"click #btnVerSistemas": "verSistemas",
+		"click #btnVerRolesPermisos": "verRolesPermisos",
   },
   buscarUsuario: function(event){
     var url = BASE_URL + "access/user/search?user=" + $("#txtUsuario").val();
@@ -366,6 +372,50 @@ var UserView = Backbone.View.extend({
 			this.message.addClass("color-error");
 			this.message.html("Debe crear primero al usuario");
 		}
+	},
+	verLogs: function(event){
+		var template = _.template(`
+			<div class="modal-dialog modal-md" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title" id="exampleModalLabel">Logs del Usuario</h4>
+						<button type="button" class="close" data-dimdiss="modal" aria-label="Close" id="closeModal">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body" id="formTableUserLog">
+						<label class="texto-der" id="mensajeRptaUserLog"></label>
+						<table class="table table-striped" style="" id="tableUserLog">
+							<thead>
+								<tr>
+									<th style="width: 10px; display:none;">id</th>
+									<th style="width: 200px;">Momento</th>
+								</tr>
+							</thead>
+							<tfoot>
+							</tfoot>
+						</table>
+					</div>
+				</div>
+			</div>
+		`);
+		this.tableUserLog.urlListar = BASE_URL + "access/user_log/list/" + this.model.get("user_id");
+		this.modalContainer.html(template({}));
+		this.modalButton.click();
+		this.tableUserLog.limpiarBody();
+    this.tableUserLog.listar();
+	},
+	verSistemas: function(event){
+		var template = _.template(`
+
+		`);
+		$(this.el).html(template({}));
+	},
+	verRolesPermisos: function(event){
+		var template = _.template(`
+
+		`);
+		$(this.el).html(template({}));
 	},
   showIndex: function(event){
 		var template = _.template(`
