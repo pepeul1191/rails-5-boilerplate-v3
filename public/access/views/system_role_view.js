@@ -1,9 +1,11 @@
 var SystemRoleView = ModalView.extend({
+  el: '#workspace',
   initialize: function(options){
     this.targetMensaje = options["targetMensaje"];
     // herencia de atributos, móetodos y eventos
     ModalView.prototype.initialize.apply(this, [options])
     this.inheritEvents(ModalView);
+    this.modalContainer = $("#modal-container");
     // delegación de eventos
     this.delegateEvents();
     this.tableRole = new TableView(dataTableRole);
@@ -20,6 +22,9 @@ var SystemRoleView = ModalView.extend({
     // table permisos
     "change #tableRolePermission > tbody > tr > td > .input-check": "clickCheckBoxRolePermission",
     "click #tableRolePermission > tfoot > tr > td > button.guardar-tabla": "guardarTablaRolePermission",
+    // modal
+    "keydown": "keyAction",
+    "click .close": "modalClose",
   },
   //eventos table de roles
   inputTextEscribirRole: function(event){
@@ -54,5 +59,17 @@ var SystemRoleView = ModalView.extend({
       role_id: this.tableRolePermission.roleId,
     };
     this.tableRolePermission.guardarTabla(event);
+  },
+  // modal
+  keyAction: function(event){
+    var code = event.keyCode || event.which;
+    if(code == 27){
+      this.modalContainer.modal('hide');
+      window.location.href = BASE_URL + "access/#/system";
+    }
+  },
+  modalClose: function(event){
+    this.modalContainer.modal('hide');
+    window.location.href = BASE_URL + "access/#/system";
   },
 });

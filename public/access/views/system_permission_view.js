@@ -15,6 +15,9 @@ var SystemPermissionView = ModalView.extend({
     "click #tablePermission > tfoot > tr > td > button.guardar-table": "guardarTablaPermission",
     "keyup #tablePermission > tbody > tr > td > input.text": "inputTextEscribirPermission",
     "click #tablePermission > tbody > tr > td > i.quitar-fila": "quitarFilaPermission",
+    // modal
+    "keydown": "keyAction",
+    "click .close": "modalClose",
   },
   //eventos table de permisos
   inputTextEscribirPermission: function(event){
@@ -29,5 +32,17 @@ var SystemPermissionView = ModalView.extend({
   },
   agregarFilaPermission: function(event){
     this.tablePermission.agregarFila(event);
+  },
+  // modal
+  keyAction: function(event){
+    var code = event.keyCode || event.which;
+    if(code == 27){
+      this.modalContainer.modal('hide');
+      window.location.href = BASE_URL + "access/#/system";
+    }
+  },
+  modalClose: function(event){
+    this.modalContainer.modal('hide');
+    window.location.href = BASE_URL + "access/#/system";
   },
 });

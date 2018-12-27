@@ -101,9 +101,7 @@ var UserRolePermissionView = Backbone.View.extend({
 			</div>
 		`);
     var systems = [];
-    console.log(this);
     var _this = this;
-    console.log(_this);
     $.ajax({
       type: "GET",
       url: BASE_URL + 'access/user_system/list/' + _this.user_id,

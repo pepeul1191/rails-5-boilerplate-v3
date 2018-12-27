@@ -6,15 +6,6 @@ var UserView = Backbone.View.extend({
 		this.message = "#mensaje";
 		this.events = this.events || {};
 		this.model = new User();
-		this.states = [
-			{id: 1, name: "Activo"},
-			{id: 2, name: "Inactivo"},
-			{id: 3, name: "Suspendido"},
-			{id: 4, name: "Eliminado"},
-			{id: 5, name: "Vacacionando"},
-			{id: 6, name: "Activación Pendiente"},
-			{id: 7, name: "Comṕleto"},
-		];
 		this.modalButton = $("#btnModal");
 		this.modalContainer = $("#modal-container");
 		this.tableUserLog = new TableView(dataTableUserLog);
@@ -483,7 +474,33 @@ var UserView = Backbone.View.extend({
 				</div>
 			</div>
 		`);
-		$(this.el).html(template({states: this.states}));
+		var states = [];
+		var _this = this;
+		$.ajax({
+			type: "GET",
+			url: BASE_URL + 'access/user_state/list',
+			data: { },
+			headers: {
+				[CSRF_KEY]: CSRF,
+			},
+			async: false,
+			success: function(data){
+				states = JSON.parse(data);
+			},
+			error: function(xhr, status, error){
+				console.error(error);
+				var m = JSON.parse(xhr.responseText);
+				console.log(m);
+				$(_this.message).removeClass("color-success");
+				$(_this.message).removeClass("color-warning");
+				$(_this.message).addClass("color-error");
+				$(_this.message).html("Ocurrió un error en obtener los estados de usuario. " + m.mensaje[1]);
+			}
+		});
+		for (var i = 0; i < states.length; i++){
+			states[i]['name'] = states[i][LANG];
+		}
+		$(this.el).html(template({states: states}));
   },
   showAdd: function(event){
 		var template = _.template(`
