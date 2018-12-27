@@ -63,8 +63,8 @@ class Access::UserController < ApplicationController
     rpta = nil
     status = 200
     data = JSON.parse(params[:data])
-    user_id = data['user_id']
-    systems = data['systems']
+    user_id = data['extra']['user_id']
+    systems = data['editados']
     rpta = []
     array_nuevos = []
     error = false
@@ -72,21 +72,22 @@ class Access::UserController < ApplicationController
     DB_ACCESS.transaction do
       begin
         systems.each do |sys|
+          puts sys
           e = Access::UserSystem.where(
             :user_id => user_id,
-            :system_id => sys['system_id'],
+            :system_id => sys['id'],
           ).first
-          if sys['exist'] == false #borrar si existe
+          if sys['existe'] == 0 #borrar si existe
             Access::UserSystem.where(
               :user_id => user_id,
-              :system_id => sys['system_id'],
+              :system_id => sys['id'],
             ).delete
           end
-          if sys['exist'] == true
+          if sys['existe'] == 1
             if e == nil
               Access::UserSystem.new(
                 :user_id => user_id,
-                :system_id => sys['system_id'],
+                :system_id => sys['id'],
               ).save
             end
           end
@@ -298,6 +299,35 @@ class Access::UserController < ApplicationController
           'Se ha producido un error en mandar el correo de activación de cuenta',
           e.message]
         }.to_json
+    end
+    render :plain => rpta, :status => status
+  end
+
+  def system_list
+    rpta = nil
+    status = 200
+    begin
+      user_id = params[:user_id]
+      rpta = DB_ACCESS.fetch('
+        SELECT T.id AS id, T.name AS name, (CASE WHEN (P.existe = 1) THEN 1 ELSE 0 END) AS existe FROM
+        (
+          SELECT id, name, 0 AS existe FROM systems
+        ) T
+        LEFT JOIN
+        (
+          SELECT S.id, S.name, 1 AS existe FROM systems S
+          INNER JOIN users_systems US ON S.id = US.system_id
+          WHERE US.user_id =  ' + user_id + '
+        ) P
+        ON T.id = P.id').to_a.to_json
+    rescue Exception => e
+      status = 500
+      rpta = {
+        :tipo_mensaje => 'error',
+        :mensaje => [
+          'Se ha producido un error en listar los sistemas del usuario',
+          e.message
+        ]}.to_json
     end
     render :plain => rpta, :status => status
   end

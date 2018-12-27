@@ -67,6 +67,7 @@ module Access::ViewHelper
         CONSTANTS[:static_url] + 'bower_components/font-awesome/css/font-awesome.min',
         CONSTANTS[:static_url] + 'bower_components/swp-backbone/assets/css/constants',
         CONSTANTS[:static_url] + 'bower_components/swp-backbone/assets/css/dashboard',
+        CONSTANTS[:static_url] + 'bower_components/swp-backbone/assets/css/table',
         CONSTANTS[:static_url] + 'assets/css/constants-managment',
         CONSTANTS[:static_url] + 'assets/css/styles-managment',
       ]
@@ -89,10 +90,16 @@ module Access::ViewHelper
         CONSTANTS[:static_url] + 'bower_components/handlebars/handlebars.min',
         CONSTANTS[:static_url] + 'bower_components/swp-backbone/views/table',
         CONSTANTS[:static_url] + 'access/models/user',
+        CONSTANTS[:static_url] + 'access/models/system',
         CONSTANTS[:static_url] + 'access/models/user_log',
+        CONSTANTS[:static_url] + 'access/models/user_system',
         CONSTANTS[:static_url] + 'access/collections/user_log_collection',
+        CONSTANTS[:static_url] + 'access/collections/system_collection',
+        CONSTANTS[:static_url] + 'access/collections/user_system_collection',
         CONSTANTS[:static_url] + 'access/data/table_user_log_data',
+        CONSTANTS[:static_url] + 'access/data/table_user_system_data',
         CONSTANTS[:static_url] + 'access/views/user_view',
+        CONSTANTS[:static_url] + 'access/views/user_system_view',
         CONSTANTS[:static_url] + 'access/routes/user',
       ]
     else

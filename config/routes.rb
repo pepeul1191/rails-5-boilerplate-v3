@@ -70,6 +70,8 @@ Rails.application.routes.draw do
   post 'access/user/update_pass' => 'access/user#update_pass'
   post 'access/user/resend_activation' => 'access/user#resend_activation'
   get 'access/user_log/list/:user_id' => 'access/user_log#list'
+  get 'access/user_system/list/:user_id' => 'access/user#system_list'
+  post 'access/user_system/save' => 'access/user#system_save'
   # permission
   get 'access/permission/list/:system_id' => 'access/permission#list'
   post 'access/permission/save' => 'access/permission#save'

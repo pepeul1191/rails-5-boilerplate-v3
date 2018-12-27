@@ -1,9 +1,9 @@
 var UserView = Backbone.View.extend({
-	el: '#userWorkspace',
+	el: '#workspace',
 	initialize: function(){
 		//this.render();
 		//console.log("initialize");
-		this.message = $("#mensaje"),
+		this.message = "#mensaje";
 		this.events = this.events || {};
 		this.model = new User();
 		this.states = [
@@ -45,15 +45,15 @@ var UserView = Backbone.View.extend({
       async: false,
       success: function(data){
 				if(data == "not_found"){
-					_this.message.removeClass("color-success");
-					_this.message.removeClass("color-warning");
-					_this.message.addClass("color-error");
-					_this.message.html("Usuario no encontrado");
+					$(_this.message).removeClass("color-success");
+					$(_this.message).removeClass("color-warning");
+					$(_this.message).addClass("color-error");
+					$(_this.message).html("Usuario no encontrado");
 					_this.bloquearFormulario();
 				}else{
-        	_this.message.addClass("color-success");
-					_this.message.removeClass("color-warning");
-					_this.message.removeClass("color-error");
+        	$(_this.message).addClass("color-success");
+					$(_this.message).removeClass("color-warning");
+					$(_this.message).removeClass("color-error");
 					_this.llenarFormulario(JSON.parse(data));
 				}
       },
@@ -61,10 +61,10 @@ var UserView = Backbone.View.extend({
         console.error(error);
 				var m = JSON.parse(xhr.responseText);
 				console.log(m);
-        _this.message.removeClass("color-success");
-				_this.message.removeClass("color-warning");
-				_this.message.addClass("color-error");
-				_this.message.html("Ocurrió un error en realizar la búsqueda. " + m.mensaje[1]);
+        $(_this.message).removeClass("color-success");
+				$(_this.message).removeClass("color-warning");
+				$(_this.message).addClass("color-error");
+				$(_this.message).html("Ocurrió un error en realizar la búsqueda. " + m.mensaje[1]);
 				$("#cbmEstado").prop("disabled", true);
 				$("#txtCorreo").prop("disabled", true);
 				$("#btnActualizarCorreo").prop("disabled", true);
@@ -131,18 +131,18 @@ var UserView = Backbone.View.extend({
 			},
 			async: false,
 			success: function(data){
-				_this.message.html("Correo actualizado");
-				_this.message.addClass("color-success");
-				_this.message.removeClass("color-warning");
-				_this.message.removeClass("color-error");
+				$(_this.message).html("Correo actualizado");
+				$(_this.message).addClass("color-success");
+				$(_this.message).removeClass("color-warning");
+				$(_this.message).removeClass("color-error");
 			},
 			error: function(xhr, status, error){
 				console.error(xhr.responseText);
 				var m = JSON.parse(xhr.responseText);
-				_this.message.html(m.mensaje[0] + ". " + m.mensaje[1	]);
-				_this.message.removeClass("color-success");
-				_this.message.removeClass("color-warning");
-				_this.message.addClass("color-error");
+				$(_this.message).html(m.mensaje[0] + ". " + m.mensaje[1	]);
+				$(_this.message).removeClass("color-success");
+				$(_this.message).removeClass("color-warning");
+				$(_this.message).addClass("color-error");
 			}
 		});
 	},
@@ -164,18 +164,18 @@ var UserView = Backbone.View.extend({
 			},
 			async: false,
 			success: function(data){
-				_this.message.html("Estado actualizado");
-				_this.message.addClass("color-success");
-				_this.message.removeClass("color-warning");
-				_this.message.removeClass("color-error");
+				$(_this.message).html("Estado actualizado");
+				$(_this.message).addClass("color-success");
+				$(_this.message).removeClass("color-warning");
+				$(_this.message).removeClass("color-error");
 			},
 			error: function(xhr, status, error){
 				console.error(xhr.responseText);
 				var m = JSON.parse(xhr.responseText);
-				_this.message.html(m.mensaje[0]);
-				_this.message.removeClass("color-success");
-				_this.message.removeClass("color-warning");
-				_this.message.addClass("color-error");
+				$(_this.message).html(m.mensaje[0]);
+				$(_this.message).removeClass("color-success");
+				$(_this.message).removeClass("color-warning");
+				$(_this.message).addClass("color-error");
 			}
 		});
 	},
@@ -194,18 +194,18 @@ var UserView = Backbone.View.extend({
 			},
 			async: false,
 			success: function(data){
-				_this.message.html(data);
-				_this.message.addClass("color-success");
-				_this.message.removeClass("color-warning");
-				_this.message.removeClass("color-error");
+				$(_this.message).html(data);
+				$(_this.message).addClass("color-success");
+				$(_this.message).removeClass("color-warning");
+				$(_this.message).removeClass("color-error");
 			},
 			error: function(xhr, status, error){
 				console.error(xhr.responseText);
 				var m = JSON.parse(xhr.responseText);
-				_this.message.html(m.mensaje[0]);
-				_this.message.removeClass("color-success");
-				_this.message.removeClass("color-warning");
-				_this.message.addClass("color-error");
+				$(_this.message).html(m.mensaje[0]);
+				$(_this.message).removeClass("color-success");
+				$(_this.message).removeClass("color-warning");
+				$(_this.message).addClass("color-error");
 			}
 		});
 	},
@@ -226,18 +226,18 @@ var UserView = Backbone.View.extend({
 			async: false,
 			success: function(data){
 				var m = JSON.parse(data);
-				_this.message.html(m.mensaje[0]);
-				_this.message.addClass("color-success");
-				_this.message.removeClass("color-warning");
-				_this.message.removeClass("color-error");
+				$(_this.message).html(m.mensaje[0]);
+				$(_this.message).addClass("color-success");
+				$(_this.message).removeClass("color-warning");
+				$(_this.message).removeClass("color-error");
 			},
 			error: function(xhr, status, error){
 				console.error(xhr.responseText);
 				var m = JSON.parse(xhr.responseText);
-				_this.message.html(m.mensaje[0]);
-				_this.message.removeClass("color-success");
-				_this.message.removeClass("color-warning");
-				_this.message.addClass("color-error");
+				$(_this.message).html(m.mensaje[0]);
+				$(_this.message).removeClass("color-success");
+				$(_this.message).removeClass("color-warning");
+				$(_this.message).addClass("color-error");
 			}
 		});
 	},
@@ -257,10 +257,10 @@ var UserView = Backbone.View.extend({
 			async: false,
 			success: function(data){
 				data = JSON.parse(data);
-				_this.message.html("Usuario creado");
-				_this.message.addClass("color-success");
-				_this.message.removeClass("color-warning");
-				_this.message.removeClass("color-error");
+				$(_this.message).html("Usuario creado");
+				$(_this.message).addClass("color-success");
+				$(_this.message).removeClass("color-warning");
+				$(_this.message).removeClass("color-error");
 				_this.model.set("user_id", data.mensaje[1]);
 				console.log(_this.model);
 			},
@@ -268,13 +268,13 @@ var UserView = Backbone.View.extend({
 				console.error(xhr.responseText);
 				var m = JSON.parse(xhr.responseText);
 				if(m.mensaje[1] == "repeated"){
-					_this.message.html("Usuario y/o correo ya se encuentran en uso");
+					$(_this.message).html("Usuario y/o correo ya se encuentran en uso");
 				}else{
-					_this.message.html(m.mensaje[0] + ". " + m.mensaje[1]);
+					$(_this.message).html(m.mensaje[0] + ". " + m.mensaje[1]);
 				}
-				_this.message.removeClass("color-success");
-				_this.message.removeClass("color-warning");
-				_this.message.addClass("color-error");
+				$(_this.message).removeClass("color-success");
+				$(_this.message).removeClass("color-warning");
+				$(_this.message).addClass("color-error");
 			}
 		});
 	},
@@ -294,10 +294,10 @@ var UserView = Backbone.View.extend({
 			},
 			error: function(error){
 				console.log(error);
-				_this.message.removeClass("color-success");
-				_this.message.removeClass("color-warning");
-				_this.message.addClass("color-error");
-				_this.message.html("Ocurrió un error en realizar la búsqueda");
+				$(_this.message).removeClass("color-success");
+				$(_this.message).removeClass("color-warning");
+				$(_this.message).addClass("color-error");
+				$(_this.message).html("Ocurrió un error en realizar la búsqueda");
 			}
 		});
 	},
@@ -318,10 +318,10 @@ var UserView = Backbone.View.extend({
 			},
 			error: function(error){
 				console.log(error);
-				_this.message.removeClass("color-success");
-				_this.message.removeClass("color-warning");
-				_this.message.addClass("color-error");
-				_this.message.html("Ocurrió un error en obtener los sistemas");
+				$(_this.message).removeClass("color-success");
+				$(_this.message).removeClass("color-warning");
+				$(_this.message).addClass("color-error");
+				$(_this.message).html("Ocurrió un error en obtener los sistemas");
 			}
 		});
 		return rpta;
@@ -331,14 +331,23 @@ var UserView = Backbone.View.extend({
 			var systems = [];
 			$.each($("input[name='systemCheckbox']"), function(){
 	      //systems.push($(this).val());
+				var temp = $(this).is(":checked");
+				var _existe = null;
+				if (temp == true){
+					_existe = 1;
+				}else{
+					_existe = 0;
+				}
 				systems.push({
-					system_id:$(this).attr("system_id"),
-	 				exist: $(this).is(":checked"),
+					id:$(this).attr("system_id"),
+	 				existe: _existe,
 				});
 	    });
 			var data = {
-				user_id: this.model.get("user_id"),
-				systems: systems,
+				editados: systems,
+				extra: {
+					user_id: this.model.get("user_id"),
+				},
 			};
 			var url = BASE_URL + "access/user/system_save";
 			var _this = this;
@@ -352,18 +361,18 @@ var UserView = Backbone.View.extend({
 				async: false,
 				success: function(data){
 					data = JSON.parse(data);
-					_this.message.html("Sistema(s) asociados al usuario");
-					_this.message.addClass("color-success");
-					_this.message.removeClass("color-warning");
-					_this.message.removeClass("color-error");
+					$(_this.message).html("Sistema(s) asociados al usuario");
+					$(_this.message).addClass("color-success");
+					$(_this.message).removeClass("color-warning");
+					$(_this.message).removeClass("color-error");
 				},
 				error: function(xhr, status, error){
 					console.error(xhr.responseText);
 					var m = JSON.parse(xhr.responseText);
-					_this.message.html(m.mensaje[0] + ". " + m.mensaje[1]);
-					_this.message.removeClass("color-success");
-					_this.message.removeClass("color-warning");
-					_this.message.addClass("color-error");
+					$(_this.message).html(m.mensaje[0] + ". " + m.mensaje[1]);
+					$(_this.message).removeClass("color-success");
+					$(_this.message).removeClass("color-warning");
+					$(_this.message).addClass("color-error");
 				}
 			});
 		}else{
@@ -406,68 +415,71 @@ var UserView = Backbone.View.extend({
     this.tableUserLog.listar();
 	},
 	verSistemas: function(event){
-		var template = _.template(`
-
-		`);
-		$(this.el).html(template({}));
+		window.location.href = BASE_URL + "access/user/#/system/" + this.model.get("user_id");
 	},
 	verRolesPermisos: function(event){
-		var template = _.template(`
-
-		`);
-		$(this.el).html(template({}));
+		window.location.href = BASE_URL + "access/user/#/roles_permissions/" + this.model.get("user_id");
 	},
   showIndex: function(event){
 		var template = _.template(`
-			<div class="col-md-12">
-				<h6>Buscar Usuarios</h6>
-			</div>
-			<div class="col-md-3">
-		    <div class="form-group">
-		      <label for="txtUsuario">Usuario</label>
-		      <input type="text" class="form-control" id="txtUsuario" placeholder="Ingrese usuario a gestionar" value="">
-					<br>
-					<button id="btnBuscarUsuario" class="btn btn-default pull-right"><i class="fa fa-search" aria-hidden="true"></i>Buscar Usuario</button>
-		    </div>
-		  </div>
-			<div class="col-md-3">
-		    <div class="form-group">
-		      <label for="cbmEstado">Estado de Usuario</label>
-		      <select class="form-control" id="cbmEstado" disabled>
-		        <option value="E"></option>
-						<% for (var i = 0; i < states.length; i++){ %>
-						<option value="<%= states[i]['id'] %>"><%= states[i]['name'] %></option>
-						<% } %>
-		      </select>
-					<br>
-					<button id="btnActualizarEstado" class="btn btn-default pull-right" disabled><i class="fa fa-check" aria-hidden="true"></i>Actualizar Estado</button>
-		    </div>
-		  </div>
-			<div class="col-md-3">
-				<div class="form-group">
-					<label for="txtCorreo">Correo del Usuario</label>
-					<input type="text" class="form-control" id="txtCorreo" disabled placeholder="" value="">
-					<br>
-					<button id="btnActualizarCorreo" class="btn btn-default pull-right" disabled><i class="fa fa-check" aria-hidden="true"></i>Actualizar Correo</button>
+			<div class="row">
+				<div class="col-md-12">
+					<h6>Buscar Usuarios</h6>
 				</div>
 			</div>
-			<div class="col-md-3">
-				<div class="form-group">
-					<label for="txtCorreo">Otras Accciones</label>
-					<br>
-					<button id="btnCambiarContrasenia" disabled class="btn btn-default pull-left"><i class="fa fa-repeat" aria-hidden="true"></i>Cambiar Contraseña</button>
-					<br>
-					<br>
-					<button id="btnReenviarActivacion" disabled class="btn btn-default pull-left"><i class="fa fa-envelope" aria-hidden="true"></i>Reenviar Activación</button>
-					<br>
-					<br>
-					<button id="btnVerLogs" disabled class="btn btn-default pull-left"><i class="fa fa-search" aria-hidden="true"></i>Ver Logs de Ingreso</button>
-					<br>
-					<br>
-					<button id="btnVerSistemas" disabled class="btn btn-default pull-left"><i class="fa fa-laptop" aria-hidden="true"></i>Ver Sistemas Asociados</button>
-					<br>
-					<br>
-					<button id="btnVerRolesPermisos" disabled class="btn btn-default pull-left"><i class="fa fa-list" aria-hidden="true"></i>Roles y Permisos</button>
+			<div class="row">
+				<div class="col-md-12">
+					<label class="texto-der" id="mensaje"></label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-3">
+			    <div class="form-group">
+			      <label for="txtUsuario">Usuario</label>
+			      <input type="text" class="form-control" id="txtUsuario" placeholder="Ingrese usuario a gestionar" value="">
+						<br>
+						<button id="btnBuscarUsuario" class="btn btn-default pull-right"><i class="fa fa-search" aria-hidden="true"></i>Buscar Usuario</button>
+			    </div>
+			  </div>
+				<div class="col-md-3">
+			    <div class="form-group">
+			      <label for="cbmEstado">Estado de Usuario</label>
+			      <select class="form-control" id="cbmEstado" disabled>
+			        <option value="E"></option>
+							<% for (var i = 0; i < states.length; i++){ %>
+							<option value="<%= states[i]['id'] %>"><%= states[i]['name'] %></option>
+							<% } %>
+			      </select>
+						<br>
+						<button id="btnActualizarEstado" class="btn btn-default pull-right" disabled><i class="fa fa-check" aria-hidden="true"></i>Actualizar Estado</button>
+			    </div>
+			  </div>
+				<div class="col-md-3">
+					<div class="form-group">
+						<label for="txtCorreo">Correo del Usuario</label>
+						<input type="text" class="form-control" id="txtCorreo" disabled placeholder="" value="">
+						<br>
+						<button id="btnActualizarCorreo" class="btn btn-default pull-right" disabled><i class="fa fa-check" aria-hidden="true"></i>Actualizar Correo</button>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="form-group">
+						<label for="txtCorreo">Otras Accciones</label>
+						<br>
+						<button id="btnCambiarContrasenia" disabled class="btn btn-default pull-left"><i class="fa fa-repeat" aria-hidden="true"></i>Cambiar Contraseña</button>
+						<br>
+						<br>
+						<button id="btnReenviarActivacion" disabled class="btn btn-default pull-left"><i class="fa fa-envelope" aria-hidden="true"></i>Reenviar Activación</button>
+						<br>
+						<br>
+						<button id="btnVerLogs" disabled class="btn btn-default pull-left"><i class="fa fa-search" aria-hidden="true"></i>Ver Logs de Ingreso</button>
+						<br>
+						<br>
+						<button id="btnVerSistemas" disabled class="btn btn-default pull-left"><i class="fa fa-laptop" aria-hidden="true"></i>Ver Sistemas Asociados</button>
+						<br>
+						<br>
+						<button id="btnVerRolesPermisos" disabled class="btn btn-default pull-left"><i class="fa fa-list" aria-hidden="true"></i>Roles y Permisos</button>
+					</div>
 				</div>
 			</div>
 		`);
@@ -475,38 +487,47 @@ var UserView = Backbone.View.extend({
   },
   showAdd: function(event){
 		var template = _.template(`
-			<div class="col-md-12">
-				<h6>Agregar Usuario</h6>
-			</div>
-			<div class="col-md-3">
-		    <div class="form-group">
-		      <label for="txtUsuarioNuevo">Usuario</label>
-		      <input type="text" class="form-control" id="txtUsuarioNuevo" placeholder="" value="">
-					<br>
-					<button id="btnGenerarUsuario" class="btn btn-default pull-right"><i class="fa fa-search" aria-hidden="true"></i>Generar Nombre</button>
-		    </div>
-		  </div>
-			<div class="col-md-3">
-				<div class="form-group">
-					<label for="txtCorreoNuevo">Correo del Usuario</label>
-					<input type="text" class="form-control" id="txtCorreoNuevo" placeholder="" value="">
-					<br>
-					<button id="btnCrearUsuario" class="btn btn-default pull-right"><i class="fa fa-check" aria-hidden="true"></i>Crear Usuario</button>
+			<div class="row">
+				<div class="col-md-12">
+					<h6>Agregar Usuario</h6>
 				</div>
 			</div>
-			<div class="col-md-6">
-				<div class="form-group">
-					<label for="txtCorreoNuevo">Sistemas</label>
-					<% for (var i = 0; i < systems.length; i++){ %>
-					<div class="form-check">
-				    <input type="checkbox" class="form-check-input" name="systemCheckbox" id="system_<%= systems[i]['id'] %>" system_id="<%= systems[i]['id'] %>">
-				    <label class="form-check-label" for="system_<%= systems[i]['id'] %>">
-							<%= systems[i]['name'] %>
-						</label>
-				  </div>
-					<% } %>
-					<br>
-					<button id="btnAsociarSistemasUsuarioNuevo" class="btn btn-default"><i class="fa fa-check" aria-hidden="true"></i>Asociar Sistemas</button>
+			<div class="row">
+				<div class="col-md-12">
+					<label class="texto-der" id="mensaje"></label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-3">
+			    <div class="form-group">
+			      <label for="txtUsuarioNuevo">Usuario</label>
+			      <input type="text" class="form-control" id="txtUsuarioNuevo" placeholder="" value="">
+						<br>
+						<button id="btnGenerarUsuario" class="btn btn-default pull-right"><i class="fa fa-search" aria-hidden="true"></i>Generar Nombre</button>
+			    </div>
+			  </div>
+				<div class="col-md-3">
+					<div class="form-group">
+						<label for="txtCorreoNuevo">Correo del Usuario</label>
+						<input type="text" class="form-control" id="txtCorreoNuevo" placeholder="" value="">
+						<br>
+						<button id="btnCrearUsuario" class="btn btn-default pull-right"><i class="fa fa-check" aria-hidden="true"></i>Crear Usuario</button>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="txtCorreoNuevo">Sistemas</label>
+						<% for (var i = 0; i < systems.length; i++){ %>
+						<div class="form-check">
+					    <input type="checkbox" class="form-check-input" name="systemCheckbox" id="system_<%= systems[i]['id'] %>" system_id="<%= systems[i]['id'] %>">
+					    <label class="form-check-label" for="system_<%= systems[i]['id'] %>">
+								<%= systems[i]['name'] %>
+							</label>
+					  </div>
+						<% } %>
+						<br>
+						<button id="btnAsociarSistemasUsuarioNuevo" class="btn btn-default"><i class="fa fa-check" aria-hidden="true"></i>Asociar Sistemas</button>
+					</div>
 				</div>
 			</div>
 		`);
