@@ -364,7 +364,53 @@ class Access::UserController < ApplicationController
   end
 
   def role_save
-
+    data = JSON.parse(params[:data])
+    editados = data['editados']
+    user_id = data['extra']['user_id']
+    rpta = []
+    status = 200
+    DB_ACCESS.transaction do
+      begin
+        if editados.length != 0
+          editados.each do |editado|
+            existe = editado['existe']
+            role_id = editado['id']
+            e = Access::UserRole.where(
+              :role_id => role_id,
+              :user_id => user_id
+            ).first
+            if existe == 0 #borrar si existe
+              if e != nil
+                e.delete
+              end
+            elsif existe == 1 #crear si no existe
+              if e == nil
+                n = Access::UserRole.new(
+                  :role_id => role_id,
+                  :user_id => user_id
+                )
+                n.save
+              end
+            end
+          end
+        end
+        rpta = {
+          :tipo_mensaje => 'success',
+          :mensaje => [
+            'Se ha registrado la asociación de roles al usuario',
+          ]}.to_json
+      rescue Exception => e
+        Sequel::Rollback
+        status = 500
+        rpta = {
+          :tipo_mensaje => 'error',
+          :mensaje => [
+            'Se ha producido un error en asociar los roles al usuario',
+            e.message
+          ]}.to_json
+      end
+    end
+    render :plain => rpta, :status => status
   end
 
   def permission_list
@@ -399,6 +445,52 @@ class Access::UserController < ApplicationController
   end
 
   def permission_save
-
+    data = JSON.parse(params[:data])
+    editados = data['editados']
+    user_id = data['extra']['user_id']
+    rpta = []
+    status = 200
+    DB_ACCESS.transaction do
+      begin
+        if editados.length != 0
+          editados.each do |editado|
+            existe = editado['existe']
+            permission_id = editado['id']
+            e = Access::UserPermission.where(
+              :permission_id => permission_id,
+              :user_id => user_id
+            ).first
+            if existe == 0 #borrar si existe
+              if e != nil
+                e.delete
+              end
+            elsif existe == 1 #crear si no existe
+              if e == nil
+                n = Access::UserPermission.new(
+                  :permission_id => permission_id,
+                  :user_id => user_id
+                )
+                n.save
+              end
+            end
+          end
+        end
+        rpta = {
+          :tipo_mensaje => 'success',
+          :mensaje => [
+            'Se ha registrado la asociación de permisos al usuario',
+          ]}.to_json
+      rescue Exception => e
+        Sequel::Rollback
+        status = 500
+        rpta = {
+          :tipo_mensaje => 'error',
+          :mensaje => [
+            'Se ha producido un error en asociar los permisos al usuario',
+            e.message
+          ]}.to_json
+      end
+    end
+    render :plain => rpta, :status => status
   end
 end

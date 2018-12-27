@@ -72,12 +72,10 @@ Rails.application.routes.draw do
   get 'access/user_log/list/:user_id' => 'access/user_log#list'
   get 'access/user_system/list/:user_id' => 'access/user#system_list'
   post 'access/user_system/save' => 'access/user#system_save'
-
   get 'access/user_role/list/:user_id/:system_id' => 'access/user#role_list'
-  post 'access/user_role/save' => 'access/role#role_save'
-
+  post 'access/user_role/save' => 'access/user#role_save'
   get 'access/user_permission/list/:user_id/:system_id' => 'access/user#permission_list'
-  post 'access/user_permission/save' => 'access/permission#permission_save'
+  post 'access/user_permission/save' => 'access/user#permission_save'
   # permission
   get 'access/permission/list/:system_id' => 'access/permission#list'
   post 'access/permission/save' => 'access/permission#save'

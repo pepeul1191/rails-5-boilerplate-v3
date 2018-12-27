@@ -14,6 +14,12 @@ var UserRolePermissionView = Backbone.View.extend({
 	},
 	events: {
     "change #cbmSystem": "seleccionarSistema",
+    // tabla roles de usuario
+    "change #tablaUserRole > tbody > tr > td > .input-check": "clickCheckBoxRolUsuario",
+    "click #tablaUserRole > tfoot > tr > td > button.guardar-tabla": "guardarTablaRolUsuario",
+    // tabla permisos de usuario
+    "change #tablaUserPermission > tbody > tr > td > .input-check": "clickCheckBoxPermisoUsuario",
+    "click #tablaUserPermission > tfoot > tr > td > button.guardar-tabla": "guardarTablaPermisoUsuario",
 		// modal
     "keydown": "keyAction",
     "click .close": "modalClose",
@@ -126,8 +132,6 @@ var UserRolePermissionView = Backbone.View.extend({
     var system_id = event.target.value;
     var user_id = this.user_id;
     //borrar body de tablas
-    $("#tablaUsuarioPermiso > tbody").empty();
-    $("#tablaUsuarioRol > tbody").empty();
     if(system_id != "E"){
       $("#row-tables").removeClass("oculto");
       //llenar tabla de roles
@@ -135,15 +139,16 @@ var UserRolePermissionView = Backbone.View.extend({
       this.tableUserRole.urlListar = BASE_URL + "access/user_role/list/" + user_id + "/" + system_id;
       this.tableUserRole.listar();
       this.tableUserRole.userId = user_id;
-      this.tableUserRole.sistemaId = system_id;
+      this.tableUserRole.systemId = system_id;
       //llenar tabla de permisos
       this.tablaUserPermission.limpiarBody();
       this.tablaUserPermission.urlListar = BASE_URL + "access/user_permission/list/" + user_id + "/" + system_id;
       this.tablaUserPermission.listar();
       this.tablaUserPermission.userId = user_id;
-      this.tablaUserPermission.sistemaId = system_id;
+      this.tablaUserPermission.systemId = system_id;
     }else{
-      $("#row-tables").addClass("oculto");
+      this.tableUserRole.limpiarBody();
+      this.tablaUserPermission.limpiarBody();
     }
   },
   // modal
@@ -156,5 +161,27 @@ var UserRolePermissionView = Backbone.View.extend({
   modalClose: function(event){
     this.modalContainer.modal('hide');
     window.location.href = BASE_URL + "access/user/#/";
+  },
+  // tabla role
+  clickCheckBoxRolUsuario: function(event){
+    this.tableUserRole.clickCheckBox(event);
+  },
+  guardarTablaRolUsuario: function(event){
+    this.tableUserRole.extraData = {
+      system_id: this.tableUserRole.systemId,
+      user_id: this.tableUserRole.userId,
+    };
+    this.tableUserRole.guardarTabla(event);
+  },
+  // table permission
+  clickCheckBoxPermisoUsuario: function(event){
+    this.tablaUserPermission.clickCheckBox(event);
+  },
+  guardarTablaPermisoUsuario: function(event){
+    this.tablaUserPermission.extraData = {
+      system_id: this.tablaUserPermission.systemId,
+      user_id: this.tablaUserPermission.userId,
+    };
+    this.tablaUserPermission.guardarTabla(event);
   },
 });
