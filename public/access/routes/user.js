@@ -3,11 +3,13 @@ var userRouter = Backbone.Router.extend({
   initialize: function() {
     this.userView = null;
     this.userSystemView = null;
+    this.userRolePermissionView = null;
   },
   routes: {
     "": "index",
     "add": "add",
     "system/:user_id": "system",
+    "roles_permissions/:user_id": "rolesPermissions",
     "*actions" : "default",
   },
   index: function(){
@@ -39,6 +41,14 @@ var userRouter = Backbone.Router.extend({
     this.userSystemView.user_id = user_id;
     this.userSystemView.tableUserSystem.limpiarBody();
     this.userSystemView.tableUserSystem.listar();
+  },
+  rolesPermissions: function(user_id){
+    if(this.userRolePermissionView == null){
+      this.userRolePermissionView = new UserRolePermissionView();
+    }
+    this.userRolePermissionView.user_id = user_id;
+    this.userRolePermissionView.render();
+    this.userRolePermissionView.modalButton.click();
   },
 });
 

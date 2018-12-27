@@ -331,4 +331,74 @@ class Access::UserController < ApplicationController
     end
     render :plain => rpta, :status => status
   end
+
+  def role_list
+    rpta = nil
+    status = 200
+    begin
+      user_id = params[:user_id]
+      system_id = params[:system_id]
+      rpta = DB_ACCESS.fetch('
+        SELECT T.id AS id, T.name AS name, (CASE WHEN (P.existe = 1) THEN 1 ELSE 0 END) AS existe FROM
+        (
+          SELECT id, name, 0 AS existe FROM roles WHERE system_id = ' + system_id + '
+        ) T
+        LEFT JOIN
+        (
+          SELECT P.id, P.name, 1 AS existe  FROM roles P
+          INNER JOIN users_roles RP ON P.id = RP.role_id
+          WHERE RP.user_id =  ' + user_id + '
+        ) P
+        ON T.id = P.id').to_a.to_json
+    rescue Exception => e
+      e.backtrace
+      status = 500
+      rpta = {
+        :tipo_mensaje => 'error',
+        :mensaje => [
+          'Se ha producido un error en listar los roles del usuario',
+          e.message
+        ]}.to_json
+    end
+    render :plain => rpta, :status => status
+  end
+
+  def role_save
+
+  end
+
+  def permission_list
+    rpta = nil
+    status = 200
+    begin
+      user_id = params[:user_id]
+      system_id = params[:system_id]
+      rpta = DB_ACCESS.fetch('
+        SELECT T.id AS id, T.name AS name, (CASE WHEN (P.existe = 1) THEN 1 ELSE 0 END) AS existe, T.description AS description FROM
+        (
+          SELECT id, name, description, 0 AS existe FROM permissions WHERE system_id = ' + system_id + '
+        ) T
+        LEFT JOIN
+        (
+          SELECT P.id, P.name,  P.description, 1 AS existe  FROM permissions P
+          INNER JOIN users_permissions RP ON P.id = RP.permission_id
+          WHERE RP.user_id =  ' + user_id + '
+        ) P
+        ON T.id = P.id').to_a.to_json
+    rescue Exception => e
+      e.backtrace
+      status = 500
+      rpta = {
+        :tipo_mensaje => 'error',
+        :mensaje => [
+          'Se ha producido un error en listar los permisos del usuario',
+          e.message
+        ]}.to_json
+    end
+    render :plain => rpta, :status => status
+  end
+
+  def permission_save
+
+  end
 end
