@@ -7,12 +7,12 @@ module LoginHelper
         CONSTANTS[:static_url] + 'bower_components/font-awesome/css/font-awesome.min',
         CONSTANTS[:static_url] + 'bower_components/swp-backbone/assets/css/constants',
         CONSTANTS[:static_url] + 'bower_components/swp-backbone/assets/css/login',
-        CONSTANTS[:static_url] + 'assets/css/constants-managment',
-        CONSTANTS[:static_url] + 'assets/css/login-managment',
+        CONSTANTS[:static_url] + 'assets/css/constants-app',
+        CONSTANTS[:static_url] + 'assets/css/login-app',
       ]
     else
       rpta = [
-        CONSTANTS[:static_url] + 'dist/login-managment.min',
+        CONSTANTS[:static_url] + 'dist/login-app.min',
       ]
     end
     rpta

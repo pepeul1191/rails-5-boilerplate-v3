@@ -9,8 +9,8 @@ module Access::ViewHelper
         CONSTANTS[:static_url] + 'bower_components/swp-backbone/assets/css/dashboard',
         CONSTANTS[:static_url] + 'bower_components/swp-backbone/assets/css/table',
         CONSTANTS[:static_url] + 'bower_components/swp-backbone/assets/css/autocomplete',
-        CONSTANTS[:static_url] + 'assets/css/constants-managment',
-        CONSTANTS[:static_url] + 'assets/css/styles-managment',
+        CONSTANTS[:static_url] + 'assets/css/constants-app',
+        CONSTANTS[:static_url] + 'assets/css/styles-app',
       ]
     else
       rpta = [
@@ -68,8 +68,8 @@ module Access::ViewHelper
         CONSTANTS[:static_url] + 'bower_components/swp-backbone/assets/css/constants',
         CONSTANTS[:static_url] + 'bower_components/swp-backbone/assets/css/dashboard',
         CONSTANTS[:static_url] + 'bower_components/swp-backbone/assets/css/table',
-        CONSTANTS[:static_url] + 'assets/css/constants-managment',
-        CONSTANTS[:static_url] + 'assets/css/styles-managment',
+        CONSTANTS[:static_url] + 'assets/css/constants-app',
+        CONSTANTS[:static_url] + 'assets/css/styles-app',
       ]
     else
       rpta = [
