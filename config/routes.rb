@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get 'login/managment' => 'login#managment'
   post 'login/managment' => 'login#access_managment'
   get 'login' => 'login#index'
+  post 'login' => 'login#index_post'
   get 'login/sign_in' => 'login#sign_in'
   get 'login/reset_password' => 'login#reset'
   post 'login/reset_password' => 'login#reset_post'

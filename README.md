@@ -45,6 +45,11 @@ Migraciones con DBMATE - access:
     puts c.response.body
     puts c.response.code
 
+### Scripts
+
+    $ ruby scripts/cipher.rb
+
+
 ---
 
 Fuentes:

@@ -23,9 +23,10 @@ class LoginController < ApplicationController
     message = ''
     lang = get_language()
     _continue = true
-    user = Access::User.where(
+    user = Access::VWUserStateSystem.where(
       :user => params[:user],
-      :pass => Assets::Cipher.encrypt(CONSTANTS[:key], params[:pass])
+      :pass => Assets::Cipher.encrypt(CONSTANTS[:key], params[:pass]),
+      :system => 'managment'
     ).first()
     if user != nil
       if user.user_state_id == 1
@@ -71,6 +72,51 @@ class LoginController < ApplicationController
       :lang => lang,
     }
     render template: 'login/index', layout: 'blank'
+  end
+
+  def index_post
+    status = 500
+    message = ''
+    lang = get_language()
+    _continue = true
+    user = Access::VWUserStateSystem.where(
+      :user => params[:user],
+      :pass => Assets::Cipher.encrypt(CONSTANTS[:key], params[:pass]),
+      :system => 'providers'
+    ).first()
+    if user != nil
+      if user.user_state_id == 1
+        # active -> create session and redirect to /managment
+        _continue = false
+        session[:status] = 'active'
+        session[:user] = params[:user]
+        if !session[:systems]
+          session[:systems] = []
+        end
+        session[:systems].push('providers')
+        session[:time] = Time.now.strftime('%Y-%m-%d %H:%M:%S')
+        session[:home] = CONSTANTS[:base_url] + 'access'
+        session[:login] = CONSTANTS[:base_url] + 'login/managment'
+        redirect_to CONSTANTS[:base_url] + 'providers'
+      else
+        message = 'Usuario no se encuentra activo'
+      end
+    else
+      message = 'Usuario o contraseña no válidos'
+    end
+    if _continue == true
+      contents = get_content('login/index')[lang]
+      @locals = {
+        :title => get_titles()[lang]['login_index'],
+        :message => message,
+        :message_type => 'color-error',
+        :css => LoginHelper::index_css,
+        :js => LoginHelper::managment_js,
+        :contents => contents,
+        :lang => lang,
+      }
+      render template: 'login/index', layout: 'blank'
+    end
   end
 
   def sign_in
