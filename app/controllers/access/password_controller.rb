@@ -11,8 +11,6 @@ class Access::PasswordController < ApplicationController
     if key == nil
       redirect_to CONSTANTS[:base_url] + 'access/error/404'
       return nil
-    else
-
     end
     contents = get_content('password/create')[lang]
     @locals = {

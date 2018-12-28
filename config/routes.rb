@@ -92,7 +92,7 @@ Rails.application.routes.draw do
   get 'access/system/list' => 'access/system#list'
   post 'access/system/save' => 'access/system#save'
   # key
-
+  get 'key/activation/:user_id/:key' => 'access/key#activation'
   #password
   get 'password/create/:user_id/:key' => 'access/password#create'
   post 'password/create' => 'access/password#create_post'
