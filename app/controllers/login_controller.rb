@@ -27,9 +27,6 @@ class LoginController < ApplicationController
       :user => params[:user],
       :pass => Assets::Cipher.encrypt(CONSTANTS[:key], params[:pass])
     ).first()
-    puts '1 ++++++++++++++++++++++++++++++++++++++++++++'
-    puts Assets::Cipher.encrypt(params[:pass], CONSTANTS[:key])
-    puts '2 ++++++++++++++++++++++++++++++++++++++++++++'
     if user != nil
       if user.user_state_id == 1
         # active -> create session and redirect to /managment

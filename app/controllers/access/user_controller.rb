@@ -33,7 +33,7 @@ class Access::UserController < ApplicationController
           :activation_key => activation_key,
           :lang => 'sp',
           :to => email,
-          :base_url => SERVICES[:mobile_back][:url]
+          :base_url => SERVICES[:mobile_back][:url] + 'password/create/'
         }
         mail.activation(data)
         # mensaje de respuesta
@@ -238,7 +238,7 @@ class Access::UserController < ApplicationController
           :reset_key => reset_key,
           :lang => 'sp',
           :to => email,
-          :base_url => SERVICES[:mobile_back][:url]
+          :base_url => SERVICES[:mobile_back][:url] + 'password/update/'
         }
         mail.reset_password(data)
         # mensaje de respuesta
@@ -281,7 +281,7 @@ class Access::UserController < ApplicationController
         :activation_key => e.activation,
         :lang => 'sp',
         :to => email,
-        :base_url => SERVICES[:mobile_back][:url]
+        :base_url => SERVICES[:mobile_back][:url] + 'key/activation/'
       }
       mail.resend_activation(data)
       # mensaje de respuesta
