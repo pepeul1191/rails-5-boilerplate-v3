@@ -54,10 +54,10 @@ class ErrorController < ApplicationController
       status = 404
     end
     url = ''
-    if session[:home]
-      url = session[:home]
+    if session[:login]
+      url = session[:login]
     else
-      url = CONSTANTS[:base_url] + CONSTANTS[:home]
+      url = CONSTANTS[:base_url]
     end
     @locals = {
       :title => 'Error',

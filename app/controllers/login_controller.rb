@@ -1,5 +1,11 @@
 class LoginController < ApplicationController
   include LoginHelper
+  before_action -> { session_false_view('managment') },
+    only: [:managment]
+  before_action -> { session_false_view('providers') },
+    only: [:index]
+  before_action -> { session_true },
+    only: [:view, ]
 
   def managment
     lang = get_language()
@@ -27,7 +33,10 @@ class LoginController < ApplicationController
         _continue = false
         session[:status] = 'active'
         session[:user] = params[:user]
-        session[:system] = 'managment'
+        if !session[:systems]
+          session[:systems] = []
+        end
+        session[:systems].push('managment')
         session[:time] = Time.now.strftime('%Y-%m-%d %H:%M:%S')
         session[:home] = CONSTANTS[:base_url] + 'access'
         session[:login] = CONSTANTS[:base_url] + 'login/managment'
@@ -98,13 +107,13 @@ class LoginController < ApplicationController
     rpta = 'usuario : ' + session[:user] + '</br>' +
       'estado : ' + session[:status] + '</br>' +
       'tiempo : ' + session[:time] + '</br>' +
-      'sistema : ' + session[:system] + '</br>' +
+      'sistema : ' + session[:systems].to_s + '</br>' +
       '<a style="margin-top:10px; display: block;width: 115px;height: 20px;background: #4E9CAF;padding: 10px;text-align: center;border-radius: 0px;color: white;font-weight: bold;" href="' + CONSTANTS[:base_url] + 'login">Regresar</a>'
     render :inline => rpta
   end
 
   def close
     reset_session
-    redirect_to '/login'
+    redirect_to CONSTANTS[:home]
   end
 end

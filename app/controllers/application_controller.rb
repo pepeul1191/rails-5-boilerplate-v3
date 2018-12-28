@@ -56,7 +56,18 @@ class ApplicationController < ActionController::Base
   end
 
   private
-  def session_true_view
+  def session_true_view(system)
+    if CONSTANTS[:session_validation] == 'able'
+      if session[:systems] && (session[:systems].include? system)
+        return nil
+      else
+        redirect_to CONSTANTS[:base_url] + 'error/access/5051'
+      end
+    end
+  end
+
+  private
+  def session_true
     if CONSTANTS[:session_validation] == 'able'
       if session[:status] != 'active'
         redirect_to CONSTANTS[:base_url] + 'error/access/5051'
@@ -65,10 +76,16 @@ class ApplicationController < ActionController::Base
   end
 
   private
-  def session_false_view
+  def session_false_view(system)
     if CONSTANTS[:session_validation] == 'able'
-      if session[:status] == 'active'
-        redirect_to CONSTANTS[:base_url]
+      if session[:systems] && (session[:systems].include? system)
+        url = CONSTANTS[:base_url]
+        if session[:home]
+          url = session[:home]
+        else
+          url = url + CONSTANTS[:home]
+        end
+        redirect_to url
       end
     end
   end

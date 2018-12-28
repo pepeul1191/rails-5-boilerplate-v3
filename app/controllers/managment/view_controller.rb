@@ -1,5 +1,6 @@
 class Managment::ViewController < ApplicationController
-  before_action :session_true_view, only: [:index, ]
+  before_action -> { session_true_view('managment') },
+    only: [:index, ]
   def index
     lang = get_language()
     menu = get_content('_menus')[lang]['managment']
