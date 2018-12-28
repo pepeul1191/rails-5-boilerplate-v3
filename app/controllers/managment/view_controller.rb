@@ -1,11 +1,6 @@
 class Managment::ViewController < ApplicationController
+  before_action :session_true_view, only: [:index, ]
   def index
-    Access::UserService.new
-    Access::LogService.new
-    puts '1 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
-    puts Assets::Cipher.encrypt(CONSTANTS[:key], 'hola mundo')
-    puts Assets::Cipher::decrypt(CONSTANTS[:key], 'CF7D69A989E1656C1060C3F3A358819C')
-    puts '2 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
     lang = get_language()
     menu = get_content('_menus')[lang]['managment']
     html_modules = ApplicationHelper::menu_modules(menu, 'managment/')

@@ -37,4 +37,56 @@ class ApplicationController < ActionController::Base
   def get_language()
     'sp'
   end
+
+  private
+  def validate_csrf
+    if CONSTANTS[:csrf_validation] == 'able'
+      if request.headers[CONSTANTS[:csrf_validation][:key]] != CONSTANTS[:csrf_validation][:secret]
+        rpta = {
+  				:tipo_mensaje => 'error',
+  				:mensaje => [
+  					'No se puede acceder al recurso',
+  					'csrf Token error'
+  				]
+  			}.to_json
+  			status = 500
+        render :plain => rpta, :status => status
+      end
+    end
+  end
+
+  private
+  def session_true_view
+    if CONSTANTS[:session_validation] == 'able'
+      if session[:status] != 'active'
+        redirect_to CONSTANTS[:base_url] + 'error/access/5051'
+      end
+    end
+  end
+
+  private
+  def session_false_view
+    if CONSTANTS[:session_validation] == 'able'
+      if session[:status] == 'active'
+        redirect_to CONSTANTS[:base_url]
+      end
+    end
+  end
+
+  private
+  def session_true_rest
+    if CONSTANTS[:session_validation] == 'able'
+      if session[:status] != 'active'
+        rpta = {
+  				:tipo_mensaje => 'error',
+  				:mensaje => [
+  					'No se puede acceder al recurso',
+  					'Necesita estar logueado'
+  				]
+  			}.to_json
+  			status = 500
+        render :plain => rpta, :status => status
+      end
+    end
+  end
 end

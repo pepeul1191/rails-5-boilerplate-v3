@@ -53,12 +53,19 @@ class ErrorController < ApplicationController
       }
       status = 404
     end
+    url = ''
+    if session[:home]
+      url = session[:home]
+    else
+      url = CONSTANTS[:base_url] + CONSTANTS[:home]
+    end
     @locals = {
       :title => 'Error',
       :hola => 'mundo',
       :css => ErrorHelper::access_css,
       :js => ErrorHelper::access_js,
       :error => error,
+      :url => url,
     }
     render template: 'error/access', layout: 'blank', status: status
   end

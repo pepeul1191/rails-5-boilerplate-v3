@@ -17,18 +17,20 @@ class LoginController < ApplicationController
     message = ''
     lang = get_language()
     _continue = true
-    user = AccessLocal::User.where(
-      :usuario => params[:user],
-      :contrasenia => params[:pass]
+    user = Access::User.where(
+      :user => params[:user],
+      :pass => params[:pass]
     ).first()
     if user != nil
-      if user.estado_usuario_id == 1
+      if user.user_state_id == 1
         # active -> create session and redirect to /managment
         _continue = false
         session[:status] = 'active'
         session[:user] = params[:user]
         session[:system] = 'managment'
         session[:time] = Time.now.strftime('%Y-%m-%d %H:%M:%S')
+        session[:home] = CONSTANTS[:base_url] + 'access'
+        session[:login] = CONSTANTS[:base_url] + 'login/managment'
         redirect_to CONSTANTS[:base_url] + 'managment'
       else
         message = 'Usuario no se encuentra activo'
