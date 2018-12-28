@@ -91,16 +91,68 @@ class LoginController < ApplicationController
   def reset
     lang = get_language()
     contents = get_content('login/reset')[lang]
+    message = ''
+    message_type = 'color-error'
     @locals = {
       :title => get_titles()[lang]['login_reset'],
       :message => '',
       :message_type => '',
       :css => LoginHelper::index_css,
       :js => LoginHelper::managment_js,
+      :message => message,
+      :message_type => message_type,
       :contents => contents,
       :lang => lang,
     }
     render template: 'login/reset', layout: 'blank'
+  end
+
+  def reset_post
+    lang = get_language()
+    contents = get_content('login/reset')[lang]
+    status = 200
+    message = ''
+    message_type = 'color-error'
+    # obtener usuario
+    user = Access::User.where(
+      :email => params[:email]
+    ).first
+    if user == nil
+      status = 500
+      message = 'Correo no registrado'
+    else
+      # obtener llave
+      e = Access::UserKey.where(
+        :user_id => user.id
+      ).first
+      key = Assets::Randito.string_number(25)
+      e.reset = key
+      e.save
+      # mandar correo de cambio de contraseña
+      mail = Mail::NotificationService.new
+      data = {
+        :user_id => user.id,
+        :reset_key => key,
+        :lang => 'sp',
+        :to => user.email,
+        :base_url => SERVICES[:mobile_back][:url] + 'password/update/'
+      }
+      mail.reset_password(data)
+      message = 'Solicitud de cambio de contreseña enviada a correo'
+      message_type = 'color-success'
+    end
+    @locals = {
+      :title => get_titles()[lang]['login_reset'],
+      :message => '',
+      :message_type => '',
+      :css => LoginHelper::index_css,
+      :js => LoginHelper::managment_js,
+      :message => message,
+      :message_type => message_type,
+      :contents => contents,
+      :lang => lang,
+    }
+    render template: 'login/reset', layout: 'blank', status: status
   end
 
   def view

@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get 'login' => 'login#index'
   get 'login/sign_in' => 'login#sign_in'
   get 'login/reset_password' => 'login#reset'
+  post 'login/reset_password' => 'login#reset_post'
   get 'view' => 'login#view'
   get 'close' => 'login#close'
   # file
@@ -15,7 +16,6 @@ Rails.application.routes.draw do
   # managment/department
   get 'managment/department/list' => 'managment/department#list'
   post 'managment/department/save' => 'managment/department#save'
-  # managment/field
   # managment/client
   get 'managment/client/list' => 'managment/client#list'
   post 'managment/client/save' => 'managment/client#save'
@@ -96,6 +96,8 @@ Rails.application.routes.draw do
   #password
   get 'password/create/:user_id/:key' => 'access/password#create'
   post 'password/create' => 'access/password#create_post'
+  get 'password/update/:user_id/:key' => 'access/password#update'
+  post 'password/update' => 'access/password#update_post'
 
   # errores
   get 'error/access/:id' => 'error#access'

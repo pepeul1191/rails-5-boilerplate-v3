@@ -5,4 +5,5 @@ sp:
   login_reset: Restablecer Contraseña
   managment_index: 'Administración'
   password_create: 'Crear Contraseña'
+  password_update: 'Cambiar Contraseña'
   key_activation: 'Cuenta Activada'

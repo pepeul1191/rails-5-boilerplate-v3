@@ -1,0 +1,13 @@
+sp:
+  form_title: Cambiar Contraseña
+  label_password: Contraseña
+  label_password_repeat: Repetir Contraseña
+  placeholder_password: Contraseña
+  placeholder_password_repeat: Reingresar Contraseña
+  button: Crear Contraseña
+  home: Ir al Inicio
+  create: Contraseña cambianda correctamente
+  status:
+    email_pending: Activación por correo pendiente
+    inexistant: Usuario y/o constraña no coinciden
+    other: Ups, ocurrió un problema
