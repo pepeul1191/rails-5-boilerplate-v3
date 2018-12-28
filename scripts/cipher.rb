@@ -10,5 +10,5 @@ def decrypt(plain_text)
   Assets::Cipher.decrypt(CONSTANTS[:key], plain_text)
 end
 
-puts encrypt('kiki123')
+puts encrypt('123')
 puts decrypt('671B962CE7652B85')

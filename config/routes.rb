@@ -91,6 +91,11 @@ Rails.application.routes.draw do
   # system
   get 'access/system/list' => 'access/system#list'
   post 'access/system/save' => 'access/system#save'
+  # key
+
+  #password
+  get 'password/create/:user_id/:key' => 'access/password#create'
+  post 'password/create' => 'access/password#create_post'
 
   # errores
   get 'error/access/:id' => 'error#access'
