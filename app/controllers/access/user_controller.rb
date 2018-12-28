@@ -5,7 +5,7 @@ class Access::UserController < ApplicationController
     status = 200
     begin
       temp_password = Assets::Randito.string_number(8)
-      password = Assets::Cipher.encrypt(temp_password, CONSTANTS[:key])
+      password = Assets::Cipher.encrypt(CONSTANTS[:key], temp_password)
       #create user if not exist
       count = Access::User.where(
         :user => user,

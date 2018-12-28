@@ -11,11 +11,6 @@ CONSTANTS = {
   :static => 'desarrollo',
   :csrf_validation  => 'disable',
   :session_validation => 'able',
-  :key => 'qKoGzNISPAXWUZEd',
-  :static => {
-    :accesos => 'http://localhost:9090/',
-    :archivos => '',
-  },
   :home => '',
   :login => 'login',
   :upload => {

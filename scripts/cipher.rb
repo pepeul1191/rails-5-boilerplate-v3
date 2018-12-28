@@ -1,24 +1,14 @@
 require 'openssl'
+require_relative '../lib/assets/cipher'
+require_relative '../config/initializers/constants'
 
-def encrypt(plain_text, key)
-  cipher = OpenSSL::Cipher.new('DES-EDE3-CBC').encrypt
-  cipher.key = Digest::SHA1.hexdigest key
-  s = cipher.update(plain_text) + cipher.final
-
-  s.unpack('H*')[0].upcase
+def encrypt(plain_text)
+  Assets::Cipher.encrypt(CONSTANTS[:key], plain_text)
 end
 
-def decrypt(cipher_text, key)
-  cipher = OpenSSL::Cipher.new('DES-EDE3-CBC').decrypt
-  cipher.key = Digest::SHA1.hexdigest key
-  s = [cipher_text].pack("H*").unpack("C*").pack("c*")
-
-  cipher.update(s) + cipher.final
+def decrypt(plain_text)
+  Assets::Cipher.decrypt(CONSTANTS[:key], plain_text)
 end
 
-puts plain = 'confidential'            # confidential
-puts key = 'secretlksadfjaklsdfjasdlkfjalkdf'                    # secret
-puts cipher = encrypt(plain, key)      # 5C6D4C5FAFFCF09F271E01C5A132BE89
-
-#puts decrypt(cipher, 'guess')          # raises OpenSSL::Cipher::CipherError
-puts decrypt(cipher, key)              # confidential
+puts encrypt('kiki123')
+puts decrypt('671B962CE7652B85')
