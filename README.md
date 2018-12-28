@@ -1,4 +1,4 @@
-# Rails BackEnd Canchas
+# Rails Boilerplate
 
 Arrancer Puma con rerun:
 
